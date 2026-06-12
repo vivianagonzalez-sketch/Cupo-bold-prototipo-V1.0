@@ -97,7 +97,7 @@ input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 22px;
 .crow { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--bg); }
 .crow:last-child { border-bottom: none; }
 .clbl { font-size: 12px; color: var(--gt); font-weight: 500; }
-.cval { font-size: 13px; font-weight: 700; color: var(--dk); }
+.cval { font-size: 13px; font-weight: 500; color: var(--dk); }
 .stabs { display: flex; background: var(--bg); border-radius: var(--r12); padding: 3px; gap: 3px; margin-bottom: 12px; }
 .stab { flex: 1; padding: 8px 4px; border: none; border-radius: 10px; background: transparent; font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 700; color: var(--gt); cursor: pointer; transition: all .2s; text-align: center; line-height: 1.4; }
 .stab.on { background: var(--wh); color: var(--az); box-shadow: var(--sh1); }
@@ -236,7 +236,7 @@ input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 22px;
 
     <div class="card" style="text-align:center;margin-bottom:12px;">
       <p class="t-lbl" style="margin-bottom:8px;">Monto a desembolsar</p>
-      <div style="font-size:38px;font-weight:900;color:var(--dk);letter-spacing:-1.5px;line-height:1;margin-bottom:12px;">$<span id="s3-amt">40.000.000</span></div>
+      <div style="font-size:34px;font-weight:600;color:var(--dk);letter-spacing:-1px;line-height:1;margin-bottom:12px;">$<span id="s3-amt">40.000.000</span></div>
       <input type="range" id="s3-sl" min="500000" max="40000000" step="500000" value="40000000" oninput="updAmt(this.value)">
       <div style="display:flex;justify-content:space-between;margin-top:6px;">
         <span class="t-lbl">$500.000</span><span class="t-lbl">$40.000.000</span>
@@ -246,19 +246,19 @@ input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 22px;
     <div class="card" style="margin-bottom:10px;">
       <p class="t-lbl" style="margin-bottom:10px;">Condiciones del crédito</p>
       <div class="crow"><span class="clbl">Tasa mensual</span><span class="cval">3,5% M.V.</span></div>
-      <div class="crow"><span class="clbl">Comisión de disponibilidad*</span><span class="cval">$23.800/mes</span></div>
+      <div class="crow"><span class="clbl">Comisión de disponibilidad</span><span class="cval">$23.800/mes</span></div>
       <div class="crow" id="row-cap" style="display:none;"><span class="clbl">Capital mínimo mensual</span><span class="cval">2% del saldo</span></div>
       <div class="crow" style="border-bottom:none;"><span class="clbl">Plazo máximo</span><span class="cval">18 meses</span></div>
 
       <!-- Pago mínimo esperado — protagonista -->
-      <div style="background:var(--bg);border-radius:var(--r8);padding:14px;margin-top:12px;margin-bottom:10px;">
+      <div style="background:var(--bg);border-radius:var(--r8);padding:12px;margin-top:12px;margin-bottom:10px;">
         <div class="row">
           <div>
-            <p style="font-size:10px;font-weight:700;color:var(--lbl);text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px;">Pago mínimo esperado</p>
+            <p style="font-size:10px;font-weight:500;color:var(--lbl);text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px;">Pago mínimo esperado</p>
             <p class="t-xs">10% de tus ventas mensuales</p>
           </div>
           <div style="text-align:right;">
-            <p style="font-size:22px;font-weight:900;color:var(--dk);" id="s3-esp">$5.000.000</p>
+            <p style="font-size:14px;font-weight:500;color:var(--dk);" id="s3-esp">$5.000.000</p>
             <p class="t-lbl" style="margin-top:1px;">/mes</p>
           </div>
         </div>
@@ -267,7 +267,7 @@ input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 22px;
       <!-- Pago mínimo exigible — secundario -->
       <div style="display:flex;justify-content:space-between;align-items:center;padding:2px 0;">
         <p class="t-xs">Mínimo exigible si tus ventas caen mucho</p>
-        <p style="font-size:12px;font-weight:700;color:var(--dk);" id="s3-min">$1.423.800</p>
+        <p style="font-size:12px;font-weight:500;color:var(--dk);" id="s3-min">$1.423.800</p>
       </div>
     </div>
 
@@ -276,12 +276,10 @@ input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 22px;
       <p class="t-xs">Con tus ventas actuales llegarás sin problema al pago esperado. Si algo ocurre, puedes pagar el mínimo exigible y no entrar en mora.</p>
     </div>
 
-    <p class="t-xs" style="margin-bottom:14px;padding:0 2px;">*La comisión de disponibilidad permite que tengas el cupo activo y solo la pagas si hay deuda activa.</p>
-
-    <!-- Botón: ¿Cuándo me bloquean el Refill? -->
+    <!-- Botón: ¿Cómo mido mi mora? -->
     <button class="btn btn-flat" onclick="goTo('s12')" style="margin-bottom:12px;">
       <span>📉</span>
-      <span style="flex:1;text-align:left;">¿Cuándo me bloquean el Refill?</span>
+      <span style="flex:1;text-align:left;">¿Cómo mido mi mora?</span>
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#121e6c" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
     </button>
   </div>
@@ -302,7 +300,7 @@ input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 22px;
       <div class="row" style="margin-bottom:10px;"><p class="t-head">Descuento de ventas</p><span class="bdg b-az">Principal</span></div>
       <div class="pmr" style="padding-top:4px;">
         <div class="pmico" style="background:#eaedfa;">📱</div>
-        <div><p class="t-body">10% sobre todas tus ventas procesadas con Bold</p><p class="t-xs" style="margin-top:3px;">Se aplica en cada transacción. Pago mínimo esperado: <strong style="color:var(--dk);">$5.000.000/mes</strong></p></div>
+        <div><p class="t-body">10% sobre todas tus ventas procesadas con Bold</p><p class="t-xs" style="margin-top:3px;">Se aplica en cada transacción. Pago mínimo esperado: $5.000.000/mes</p></div>
       </div>
     </div>
     <div class="card" style="margin-bottom:11px;">
@@ -311,25 +309,6 @@ input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 22px;
       <div class="pmr"><div class="pmico">🔁</div><div style="flex:1;"><div class="row"><p class="t-body">Débitos automáticos</p><span class="bdg b-gr">Voluntario</span></div><p class="t-xs" style="margin-top:2px;">Desde tu cuenta Bold o tus cuentas bancarias inscritas</p></div></div>
       <div class="pmr" style="border-bottom:none;"><div class="pmico">💵</div><div style="flex:1;"><div class="row"><p class="t-body">Efecty / Corresponsal</p><span class="bdg b-gr">Voluntario</span></div></div></div>
     </div>
-    <div class="card" style="padding:0 16px;">
-      <div class="acchdr" onclick="toggleAcc('risk-b','risk-ico')">
-        <div style="display:flex;align-items:center;gap:9px;"><span style="font-size:16px;">📉</span><p class="t-body">¿Cómo entro en mora?</p></div>
-        <div class="accico card-style" id="risk-ico"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#121e6c" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></div>
-      </div>
-      <div class="accbody" id="risk-b">
-        <p class="t-xs" style="margin-bottom:12px;">Monitoreamos tus ventas mes a mes. Si bajan mucho, actuamos:</p>
-        <div class="rrule">
-          <div class="rdot" style="background:var(--am);"></div>
-          <div><p class="t-body" style="color:var(--am);margin-bottom:2px;">2 meses bajando → Refill bloqueado</p><p class="t-xs">Pausamos tu acceso a más cupo hasta que las ventas se recuperen.</p></div>
-        </div>
-        <div class="rrule" style="border-bottom:none;">
-          <div class="rdot" style="background:var(--re);"></div>
-          <div><p class="t-body" style="color:var(--re);margin-bottom:2px;">4 meses bajando → Deuda acelerada</p><p class="t-xs" id="risk-txt">Exigimos el capital pendiente de inmediato.</p></div>
-        </div>
-        <p class="t-xs" style="padding:10px 0 4px;">Lo verás en tiempo real en tu dashboard.</p>
-      </div>
-    </div>
-    <p class="t-xs" style="padding:12px 2px 0;">*Este crédito está pensado para pagarse en máximo 18 meses. Si vemos que no vas a lograrlo, aceleraremos el cobro del capital pendiente.</p>
   </div>
   <div class="bfoot"><button class="btn btn-p" onclick="goTo('s5')">Continuar →</button></div>
 </div>
@@ -400,7 +379,7 @@ input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 22px;
     <p class="t-sm" style="margin:6px 0 18px;">Llegará a tu Cuenta Bold en minutos.</p>
     <div class="gcard" style="width:100%;text-align:left;margin-bottom:16px;">
       <p class="t-lbl" style="color:rgba(255,255,255,.52);margin-bottom:5px;">Monto desembolsado</p>
-      <div style="font-size:34px;font-weight:900;color:#fff;letter-spacing:-1px;margin-bottom:7px;">$<span id="s7-m">40.000.000</span></div>
+      <div style="font-size:28px;font-weight:600;color:#fff;letter-spacing:-.5px;margin-bottom:7px;">$<span id="s7-m">40.000.000</span></div>
       <p style="font-size:11px;color:rgba(255,255,255,.6);">Próximo corte: <strong style="color:rgba(255,255,255,.9);">5 jul 2026</strong></p>
     </div>
     <div style="width:100%;text-align:left;">
@@ -418,7 +397,10 @@ input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 22px;
 <!-- ══════════ S8 · DASHBOARD ══════════ -->
 <div class="screen" id="s8">
   <div class="dhead">
-    <div><p style="font-size:17px;font-weight:900;color:var(--az);letter-spacing:-.4px;">bold</p><p class="t-xs" style="margin-top:1px;">Mi Cupo Bold</p></div>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <button onclick="goTo('s1')" style="width:32px;height:32px;border-radius:50%;border:none;background:var(--bg);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .15s;" onmouseover="this.style.background='var(--bd)'" onmouseout="this.style.background='var(--bg)'"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#121e6c" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg></button>
+      <div><p style="font-size:17px;font-weight:900;color:var(--az);letter-spacing:-.4px;">bold</p><p class="t-xs" style="margin-top:1px;">Mi Cupo Bold</p></div>
+    </div>
     <div id="d-badge" class="bdg b-vd">● Al día</div>
   </div>
   <div class="echips">
@@ -438,15 +420,15 @@ input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 22px;
         <div style="display:flex;gap:8px;margin-bottom:10px;">
           <div style="flex:1;background:var(--bg);border-radius:var(--r8);padding:10px;text-align:center;">
             <p class="t-lbl" style="margin-bottom:3px;">Total</p>
-            <p style="font-size:15px;font-weight:900;color:var(--dk);">$40M</p>
+            <p style="font-size:13px;font-weight:500;color:var(--dk);">$40M</p>
           </div>
           <div style="flex:1;background:var(--bg);border-radius:var(--r8);padding:10px;text-align:center;">
             <p class="t-lbl" style="margin-bottom:3px;">Usado</p>
-            <p style="font-size:15px;font-weight:900;color:var(--dk);" id="d-usado">$40M</p>
+            <p style="font-size:13px;font-weight:500;color:var(--dk);" id="d-usado">$40M</p>
           </div>
           <div style="flex:1;background:var(--bg);border-radius:var(--r8);padding:10px;text-align:center;">
             <p class="t-lbl" style="margin-bottom:3px;">Disponible</p>
-            <p style="font-size:15px;font-weight:900;color:var(--dk);" id="d-disp">$0</p>
+            <p style="font-size:13px;font-weight:500;color:var(--dk);" id="d-disp">$0</p>
           </div>
         </div>
         <div class="pbar" style="margin-bottom:12px;"><div id="d-cupobar" class="pfill" style="width:100%;"></div></div>
@@ -468,34 +450,31 @@ input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 22px;
       <div class="card" style="margin-bottom:14px;">
         <div class="row" style="margin-bottom:8px;">
           <p class="t-body">Estado del crédito</p>
-          <span style="font-size:12px;font-weight:800;color:var(--dk);" id="d-pct">5% pagado</span>
+          <span style="font-size:12px;font-weight:500;color:var(--dk);" id="d-pct">5% pagado</span>
         </div>
         <div class="pbar" style="margin-bottom:14px;"><div class="pfill" id="d-prog" style="width:5%;"></div></div>
         <div class="g2" style="margin-bottom:14px;">
-          <div class="mmet"><p class="t-lbl" style="margin-bottom:4px;">Saldo actual</p><p style="font-size:16px;font-weight:900;color:var(--dk);" id="d-saldo">$38.000.000</p></div>
-          <div class="mmet"><p class="t-lbl" style="margin-bottom:4px;">Ya abonado</p><p style="font-size:16px;font-weight:900;color:var(--dk);" id="d-pagado">$2.000.000</p></div>
-          <div class="mmet"><p class="t-lbl" style="margin-bottom:4px;">Meses restantes</p><p style="font-size:16px;font-weight:900;color:var(--dk);" id="d-meses">17 meses</p></div>
-          <div class="mmet"><p class="t-lbl" style="margin-bottom:4px;">Vence</p><p style="font-size:16px;font-weight:900;color:var(--dk);">Dic 2027</p></div>
-        </div>
-        <div class="card-am" style="margin-bottom:12px;">
-          <div class="row">
-            <div><p class="t-lbl" style="color:var(--am);margin-bottom:3px;">Cuota final proyectada (mes 18)</p><p class="t-xs" id="d-c18-lbl" style="margin-top:1px;">Capital acumulado pendiente</p></div>
-            <p style="font-size:18px;font-weight:900;color:var(--dk);" id="d-c18">—</p>
-          </div>
+          <div class="mmet"><p class="t-lbl" style="margin-bottom:4px;">Saldo actual</p><p style="font-size:14px;font-weight:500;color:var(--dk);" id="d-saldo">$38.000.000</p></div>
+          <div class="mmet"><p class="t-lbl" style="margin-bottom:4px;">Ya abonado</p><p style="font-size:14px;font-weight:500;color:var(--dk);" id="d-pagado">$2.000.000</p></div>
+          <div class="mmet"><p class="t-lbl" style="margin-bottom:4px;">Meses restantes</p><p style="font-size:14px;font-weight:500;color:var(--dk);" id="d-meses">17 meses</p></div>
+          <div class="mmet"><p class="t-lbl" style="margin-bottom:4px;">Vence</p><p style="font-size:14px;font-weight:500;color:var(--dk);">Dic 2027</p></div>
         </div>
         <p class="t-lbl" style="margin-bottom:8px;">Este mes</p>
-        <div style="display:flex;gap:8px;">
+        <div style="display:flex;gap:8px;margin-bottom:12px;">
           <div style="flex:1;background:var(--bg);border-radius:var(--r8);padding:11px;text-align:center;">
             <p class="t-lbl" style="margin-bottom:4px;">Pago esperado</p>
-            <p style="font-size:15px;font-weight:900;color:var(--dk);" id="d-esp-val">$5.000.000</p>
+            <p style="font-size:13px;font-weight:500;color:var(--dk);" id="d-esp-val">$5.000.000</p>
             <p class="t-xs" style="margin-top:2px;">10% de ventas</p>
           </div>
           <div style="flex:1;background:var(--bg);border-radius:var(--r8);padding:11px;text-align:center;">
             <p class="t-lbl" style="margin-bottom:4px;">Mínimo exigible</p>
-            <p style="font-size:15px;font-weight:900;color:var(--dk);" id="d-min-val">$1.423.800</p>
+            <p style="font-size:13px;font-weight:500;color:var(--dk);" id="d-min-val">$1.423.800</p>
             <p class="t-xs" style="margin-top:2px;">Si ventas bajan</p>
           </div>
         </div>
+        <button onclick="doPagar()" class="btn btn-flat" style="font-size:13px;padding:12px 16px;">
+          <span>💳</span> Hacer un pago
+        </button>
       </div>
     </div>
 
@@ -530,10 +509,9 @@ input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 22px;
     <div class="card-vd" style="margin-bottom:14px;">
       <p class="t-lbl" style="color:#0a7a38;margin-bottom:7px;">Resumen — mes actual</p>
       <p class="t-xs" style="line-height:2;">
-        Ventas procesadas: <strong style="color:var(--dk);">$50.000.000</strong><br>
-        Descuento aplicado (10%): <strong style="color:var(--dk);">$5.000.000</strong><br>
-        → Interés: <strong style="color:var(--dk);">$<span id="hs-int">—</span></strong> · Comisión: <strong style="color:var(--dk);">$23.800</strong> · Capital: <strong style="color:var(--dk);">$<span id="hs-cap">—</span></strong><br>
-        Cuota proyectada mes 18: <strong style="color:var(--dk);" id="hs-c18">—</strong>
+        Ventas procesadas: $50.000.000<br>
+        Descuento aplicado (10%): $5.000.000<br>
+        Interés: $<span id="hs-int">—</span> · Comisión: $23.800 · Capital: $<span id="hs-cap">—</span>
       </p>
     </div>
     <div class="card" style="padding:0;overflow:hidden;">
@@ -578,7 +556,7 @@ input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 22px;
       </div>
       <div style="background:var(--bg);border-radius:var(--r8);padding:13px;margin-top:4px;">
         <p class="t-lbl" style="margin-bottom:5px;">Impacto en tu crédito</p>
-        <p class="t-sm" id="pct-msg" style="color:var(--dk);font-weight:700;">Con 10% terminarías en ~10 meses</p>
+        <p class="t-sm" id="pct-msg" style="color:var(--dk);font-weight:500;">Con 10% terminarías en ~10 meses</p>
         <p class="t-xs" style="margin-top:3px;">Ventas base estimadas: <strong>$50.000.000/mes</strong></p>
       </div>
     </div>
@@ -690,14 +668,14 @@ input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 22px;
             </tr>
           </thead>
           <tbody>
-            <tr style="background:#eafaf2;"><td style="padding:7px 8px;color:#0a7a38;font-weight:700;">M1</td><td style="padding:7px 6px;text-align:right;color:var(--dk);font-weight:600;">$55M</td><td style="padding:7px 6px;text-align:right;color:#0a7a38;font-weight:700;">$5,5M</td><td style="padding:7px 8px;text-align:right;color:var(--dk);font-weight:600;">$36M</td></tr>
-            <tr style="background:#fff;"><td style="padding:7px 8px;color:#0a7a38;font-weight:700;">M2</td><td style="padding:7px 6px;text-align:right;color:var(--dk);font-weight:600;">$58M</td><td style="padding:7px 6px;text-align:right;color:#0a7a38;font-weight:700;">$5,8M</td><td style="padding:7px 8px;text-align:right;color:var(--dk);font-weight:600;">$31M</td></tr>
-            <tr style="background:#eafaf2;"><td style="padding:7px 8px;color:#0a7a38;font-weight:700;">M3</td><td style="padding:7px 6px;text-align:right;color:var(--dk);font-weight:600;">$55M</td><td style="padding:7px 6px;text-align:right;color:#0a7a38;font-weight:700;">$5,5M</td><td style="padding:7px 8px;text-align:right;color:var(--dk);font-weight:600;">$27M</td></tr>
-            <tr style="background:#fff;"><td style="padding:7px 8px;color:#0a7a38;font-weight:700;">M4</td><td style="padding:7px 6px;text-align:right;color:var(--dk);font-weight:600;">$56M</td><td style="padding:7px 6px;text-align:right;color:#0a7a38;font-weight:700;">$5,6M</td><td style="padding:7px 8px;text-align:right;color:var(--dk);font-weight:600;">$22M</td></tr>
-            <tr style="background:#fffaeb;"><td style="padding:7px 8px;color:#9a6800;font-weight:700;">M5 ⚠️</td><td style="padding:7px 6px;text-align:right;color:var(--dk);font-weight:600;">$38M</td><td style="padding:7px 6px;text-align:right;color:#9a6800;font-weight:700;">$3,8M</td><td style="padding:7px 8px;text-align:right;color:var(--dk);font-weight:600;">$19M</td></tr>
-            <tr style="background:#fffaeb;"><td style="padding:7px 8px;color:#9a6800;font-weight:700;">M6 🔒</td><td style="padding:7px 6px;text-align:right;color:var(--dk);font-weight:600;">$27M</td><td style="padding:7px 6px;text-align:right;color:#9a6800;font-weight:700;">$2,7M</td><td style="padding:7px 8px;text-align:right;color:var(--dk);font-weight:600;">$17M</td></tr>
-            <tr style="background:#fef0f2;"><td style="padding:7px 8px;color:var(--re);font-weight:700;">M7</td><td style="padding:7px 6px;text-align:right;color:var(--dk);font-weight:600;">$19M</td><td style="padding:7px 6px;text-align:right;color:var(--re);font-weight:700;">$1,9M</td><td style="padding:7px 8px;text-align:right;color:var(--dk);font-weight:600;">$16M</td></tr>
-            <tr style="background:#fef0f2;"><td style="padding:7px 8px;color:var(--re);font-weight:700;">M8 ⚡</td><td style="padding:7px 6px;text-align:right;color:var(--dk);font-weight:600;">$13M</td><td style="padding:7px 6px;text-align:right;color:var(--re);font-weight:700;">$1,3M</td><td style="padding:7px 8px;text-align:right;color:var(--dk);font-weight:600;">$15M</td></tr>
+            <tr style="background:#eafaf2;"><td style="padding:7px 8px;color:#0a7a38;font-weight:600;">M1</td><td style="padding:7px 6px;text-align:right;color:var(--dk);font-weight:500;">$55M</td><td style="padding:7px 6px;text-align:right;color:#0a7a38;font-weight:500;">$5,5M</td><td style="padding:7px 8px;text-align:right;color:var(--dk);font-weight:500;">$36M</td></tr>
+            <tr style="background:#fff;"><td style="padding:7px 8px;color:#0a7a38;font-weight:600;">M2</td><td style="padding:7px 6px;text-align:right;color:var(--dk);font-weight:500;">$58M</td><td style="padding:7px 6px;text-align:right;color:#0a7a38;font-weight:500;">$5,8M</td><td style="padding:7px 8px;text-align:right;color:var(--dk);font-weight:500;">$31M</td></tr>
+            <tr style="background:#eafaf2;"><td style="padding:7px 8px;color:#0a7a38;font-weight:600;">M3</td><td style="padding:7px 6px;text-align:right;color:var(--dk);font-weight:500;">$55M</td><td style="padding:7px 6px;text-align:right;color:#0a7a38;font-weight:500;">$5,5M</td><td style="padding:7px 8px;text-align:right;color:var(--dk);font-weight:500;">$27M</td></tr>
+            <tr style="background:#fff;"><td style="padding:7px 8px;color:#0a7a38;font-weight:600;">M4</td><td style="padding:7px 6px;text-align:right;color:var(--dk);font-weight:500;">$56M</td><td style="padding:7px 6px;text-align:right;color:#0a7a38;font-weight:500;">$5,6M</td><td style="padding:7px 8px;text-align:right;color:var(--dk);font-weight:500;">$22M</td></tr>
+            <tr style="background:#fffaeb;"><td style="padding:7px 8px;color:#9a6800;font-weight:600;">M5 ⚠️</td><td style="padding:7px 6px;text-align:right;color:var(--dk);font-weight:500;">$38M</td><td style="padding:7px 6px;text-align:right;color:#9a6800;font-weight:500;">$3,8M</td><td style="padding:7px 8px;text-align:right;color:var(--dk);font-weight:500;">$19M</td></tr>
+            <tr style="background:#fffaeb;"><td style="padding:7px 8px;color:#9a6800;font-weight:600;">M6 🔒</td><td style="padding:7px 6px;text-align:right;color:var(--dk);font-weight:500;">$27M</td><td style="padding:7px 6px;text-align:right;color:#9a6800;font-weight:500;">$2,7M</td><td style="padding:7px 8px;text-align:right;color:var(--dk);font-weight:500;">$17M</td></tr>
+            <tr style="background:#fef0f2;"><td style="padding:7px 8px;color:var(--re);font-weight:600;">M7</td><td style="padding:7px 6px;text-align:right;color:var(--dk);font-weight:500;">$19M</td><td style="padding:7px 6px;text-align:right;color:var(--re);font-weight:500;">$1,9M</td><td style="padding:7px 8px;text-align:right;color:var(--dk);font-weight:500;">$16M</td></tr>
+            <tr style="background:#fef0f2;"><td style="padding:7px 8px;color:var(--re);font-weight:600;">M8 ⚡</td><td style="padding:7px 6px;text-align:right;color:var(--dk);font-weight:500;">$13M</td><td style="padding:7px 6px;text-align:right;color:var(--re);font-weight:500;">$1,3M</td><td style="padding:7px 8px;text-align:right;color:var(--dk);font-weight:500;">$15M</td></tr>
           </tbody>
         </table>
       </div>
@@ -733,12 +711,10 @@ function setExp(e) {
     $('ben2-txt').textContent = 'En meses de pocas ventas, pagas 2% del saldo + interés + comisión. Esto te ayuda a no entrar en mora cuando las ventas bajen.';
     $('s1-min-txt').textContent = 'En meses de pocas ventas, pagas 2% saldo + interés + comisión';
     if ($('row-cap'))  $('row-cap').style.display = 'flex';
-    if ($('risk-txt')) $('risk-txt').textContent  = 'Exigimos el capital pendiente de inmediato.';
   } else {
     $('ben2-txt').textContent = 'En meses de pocas ventas, sólo pagas el pago mínimo exigible. Esto te ayuda a no entrar en mora en meses donde bajen las ventas.';
     $('s1-min-txt').textContent = 'En meses de pocas ventas, sólo pagas el mínimo exigible sin entrar en mora';
     if ($('row-cap'))  $('row-cap').style.display = 'none';
-    if ($('risk-txt')) $('risk-txt').textContent  = 'Exigimos el capital pendiente de inmediato.';
   }
   updAmt(AMT);
 }
@@ -867,8 +843,6 @@ function setDash(state) {
   $('d-saldo').textContent  = c.saldo;
   $('d-pagado').textContent = c.pagado;
   $('d-meses').textContent  = c.meses;
-  $('d-c18').textContent    = c.c18;
-  $('d-c18-lbl').textContent = c.c18lbl;
   $('d-esp-val').textContent = c.espVal;
   $('d-min-val').textContent = c.minVal;
 }
@@ -984,7 +958,9 @@ function buildChart(svgId, pts, months, breakAmber, breakRed) {
 }
 
 function drawVentasChart(tpv) {
-  const d = S11_DATA[tpv] || S11_DATA.vd;
+  const tpvMap = {s:'vd', a:'am', m:'co'};
+  const key = tpvMap[tpv] || tpv;
+  const d = S11_DATA[key] || S11_DATA.vd;
   buildChart('s11-chart', d.pts, d.months, d.breakAmber, d.breakRed);
 
   // Update state card
@@ -1001,7 +977,7 @@ function drawVentasChart(tpv) {
     const bg = {vd:'background:#eafaf2',am:'background:#fffaeb',co:'background:#fef0f2'};
     const clr = {vd:'#0a7a38',am:'#9a6800',co:'#cc2233'};
     tbody.innerHTML = d.rows.map(r =>
-      `<tr style="${bg[r.st]}"><td style="padding:7px 8px;color:${clr[r.st]};font-weight:700;">${r.m}</td><td style="padding:7px 6px;text-align:right;color:var(--dk);font-weight:600;">${r.v}</td><td style="padding:7px 6px;text-align:right;color:${clr[r.st]};font-weight:700;">${r.r}</td><td style="padding:7px 8px;text-align:right;color:var(--dk);font-weight:600;">${r.s}</td></tr>`
+      `<tr style="${bg[r.st]}"><td style="padding:7px 8px;color:${clr[r.st]};font-weight:600;">${r.m}</td><td style="padding:7px 6px;text-align:right;color:var(--dk);font-weight:500;">${r.v}</td><td style="padding:7px 6px;text-align:right;color:${clr[r.st]};font-weight:500;">${r.r}</td><td style="padding:7px 8px;text-align:right;color:var(--dk);font-weight:500;">${r.s}</td></tr>`
     ).join('');
   }
 }
@@ -1024,19 +1000,13 @@ function buildHist() {
     const capPaid=Math.max(capMin,mp-interest-COMM);
     cap=Math.max(0,cap-capPaid);
     const bg=m%2===0?'background:#f5f7ff;':'background:#fff;';
-    rows+=`<tr style="${bg}"><td style="padding:9px 10px;color:var(--lbl);font-weight:600;">Mes ${m}</td><td style="padding:9px 7px;text-align:right;font-weight:700;color:var(--dk);">$${f(mp)}</td><td style="padding:9px 7px;text-align:right;color:var(--am);font-weight:600;">$${f(interest)}</td><td style="padding:9px 7px;text-align:right;color:var(--gt);font-weight:500;">$${f(COMM)}</td><td style="padding:9px 7px;text-align:right;color:var(--vd);font-weight:600;">$${f(capPaid)}</td><td style="padding:9px 10px;text-align:right;font-weight:800;color:var(--dk);">$${f(cap)}</td></tr>`;
+    rows+=`<tr style="${bg}"><td style="padding:9px 10px;color:var(--lbl);font-weight:500;">Mes ${m}</td><td style="padding:9px 7px;text-align:right;font-weight:500;color:var(--dk);">$${f(mp)}</td><td style="padding:9px 7px;text-align:right;color:var(--am);font-weight:500;">$${f(interest)}</td><td style="padding:9px 7px;text-align:right;color:var(--gt);font-weight:500;">$${f(COMM)}</td><td style="padding:9px 7px;text-align:right;color:var(--vd);font-weight:500;">$${f(capPaid)}</td><td style="padding:9px 10px;text-align:right;font-weight:500;color:var(--dk);">$${f(cap)}</td></tr>`;
     if (cap<=0) break;
   }
   tbody.innerHTML=rows;
   const m1i=AMT*RATE, m1c=Math.max(isTc?AMT*CAP_TC:0,mp-m1i-COMM);
   if ($('hs-int')) $('hs-int').textContent=f(m1i);
   if ($('hs-cap')) $('hs-cap').textContent=f(m1c);
-  let est=AMT;
-  for (let m=0;m<18;m++) {
-    const i=est*RATE, cp=isTc?est*CAP_TC:0;
-    est=Math.max(0,est-Math.max(cp,mp-i-COMM)); if(est<=0) break;
-  }
-  if ($('hs-c18')) $('hs-c18').textContent=est>0?'$'+f(est*(1+RATE)+COMM):'$0 (liquidado ✓)';
 }
 
 function dlExcel() {
@@ -1061,6 +1031,13 @@ function reqPct() {
   const btn=$('s10').querySelector('.btn-p'), orig=btn.innerHTML;
   btn.innerHTML='✅ Solicitud enviada'; btn.style.background='var(--vd)'; btn.disabled=true;
   setTimeout(()=>{btn.innerHTML=orig;btn.style.background='';btn.disabled=false;},2500);
+}
+
+/* ═══ PAGAR ═══ */
+function doPagar() {
+  const btn = event.target.closest('button'), orig = btn.innerHTML;
+  btn.innerHTML = '✅ Redirigiendo a pagos...'; btn.disabled = true;
+  setTimeout(() => { btn.innerHTML = orig; btn.disabled = false; }, 2200);
 }
 
 /* ═══ REFILL ═══ */
