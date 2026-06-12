@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cupo Bold — v4.1</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --az: #121e6c;
+  --co: #ee424e;
+  --bg: #f0f2f8;
+  --bd: #dde0ee;
+  --gt: #8f93ad;
+  --lbl: #5a5e7a;
+  --dk: #0e1225;
+  --wh: #ffffff;
+  --vd: #0ea84a;
+  --am: #d98b00;
+  --re: #cc2233;
+  --grad: linear-gradient(145deg, #121e6c 0%, #3b1bab 50%, #ee424e 100%);
+  --grad-s: linear-gradient(145deg, #1a2985 0%, #ee424e 100%);
+  --sh0: 0 1px 3px rgba(14,18,37,.05);
+  --sh1: 0 3px 12px rgba(14,18,37,.08);
+  --r22: 22px; --r16: 16px; --r12: 12px; --r8: 8px;
+}
+*, ::before, ::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Montserrat', sans-serif;
+  background: #07091e;
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: flex-start;
+  padding: 28px 16px 48px; gap: 16px;
+}
+.dbar {
+  display: flex; align-items: center; gap: 6px;
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.09);
+  border-radius: 40px; padding: 5px 5px 5px 14px;
+}
+.dbar-lbl { font-size: 10px; font-weight: 700; color: rgba(255,255,255,.32); text-transform: uppercase; letter-spacing: .6px; margin-right: 2px; }
+.xbtn { padding: 6px 16px; border-radius: 30px; border: none; font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 700; cursor: pointer; transition: all .2s; background: transparent; color: rgba(255,255,255,.28); }
+.xbtn.on { background: var(--co); color: #fff; box-shadow: 0 2px 14px rgba(238,66,78,.4); }
+.phone { width: 390px; background: var(--bg); border-radius: 48px; overflow: hidden; box-shadow: 0 40px 100px rgba(0,0,0,.65), 0 0 0 1px rgba(255,255,255,.06), inset 0 1px 0 rgba(255,255,255,.07); display: flex; flex-direction: column; min-height: 844px; position: relative; }
+.notch { width: 116px; height: 30px; background: #07091e; border-radius: 0 0 20px 20px; margin: 0 auto; flex-shrink: 0; }
+.pgrow { display: flex; align-items: center; gap: 10px; padding: 10px 18px 9px; flex-shrink: 0; background: var(--wh); border-bottom: 1px solid var(--bd); }
+.pgbk { width: 32px; height: 32px; border-radius: 50%; border: none; background: var(--bg); cursor: pointer; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: background .15s; }
+.pgbk:hover { background: var(--bd); }
+.pgbk svg { width: 15px; height: 15px; }
+.pgtrack { flex: 1; height: 6px; background: var(--bd); border-radius: 6px; overflow: hidden; }
+.pgfill { height: 100%; background: var(--grad); border-radius: 6px; transition: width .6s cubic-bezier(.4,0,.2,1); }
+.pglbl { font-size: 10px; font-weight: 800; color: var(--az); background: var(--bg); padding: 3px 10px; border-radius: 20px; white-space: nowrap; }
+.screen { display: none; flex-direction: column; flex: 1; overflow-y: auto; scroll-behavior: smooth; }
+.screen.active { display: flex; }
+.sc { flex: 1; padding: 4px 18px 20px; display: flex; flex-direction: column; }
+.t-title { font-size: 24px; font-weight: 900; color: var(--dk); line-height: 1.12; letter-spacing: -.6px; }
+.t-h2 { font-size: 19px; font-weight: 900; color: var(--dk); line-height: 1.2; letter-spacing: -.3px; }
+.t-head { font-size: 14px; font-weight: 800; color: var(--dk); }
+.t-body { font-size: 13px; font-weight: 600; color: var(--dk); }
+.t-sm { font-size: 12px; font-weight: 500; color: var(--lbl); line-height: 1.6; }
+.t-xs { font-size: 11px; font-weight: 500; color: var(--gt); line-height: 1.55; }
+.t-lbl { font-size: 10px; font-weight: 700; color: var(--gt); text-transform: uppercase; letter-spacing: .55px; }
+.card { background: var(--wh); border-radius: var(--r16); padding: 16px; box-shadow: var(--sh1); }
+.card-bg { background: var(--bg); border-radius: var(--r12); padding: 13px; }
+.card-vd { background: #eafaf2; border-radius: var(--r12); padding: 12px; border: 1px solid #b8e8cc; }
+.card-am { background: #fffaeb; border-radius: var(--r12); padding: 12px; border: 1px solid #f5e0a0; }
+.card-co { background: #fef0f2; border-radius: var(--r12); padding: 12px; border: 1px solid #fbbfc4; }
+.gcard { background: var(--grad); border-radius: var(--r22); padding: 20px; position: relative; overflow: hidden; box-shadow: 0 14px 44px rgba(18,30,108,.38); }
+.gcard::before { content: ''; position: absolute; top: -70px; right: -50px; width: 200px; height: 200px; border-radius: 50%; background: rgba(255,255,255,.05); }
+.btn { width: 100%; padding: 15px 18px; border: none; border-radius: var(--r16); font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 700; cursor: pointer; transition: all .16s; display: flex; align-items: center; justify-content: center; gap: 8px; }
+.btn-p { background: var(--co); color: #fff; box-shadow: 0 4px 18px rgba(238,66,78,.3); }
+.btn-p:hover { opacity: .91; transform: translateY(-1px); }
+.btn-p:active { transform: scale(.98); }
+.btn-p:disabled { background: var(--bd); color: var(--gt); box-shadow: none; cursor: not-allowed; transform: none; }
+.btn-flat { background: var(--bg); color: var(--az); border: 1.5px solid var(--bd); font-size: 13px; padding: 12px 16px; }
+.btn-flat:hover { background: var(--bd); }
+.bfoot { padding: 0 18px 26px; display: flex; flex-direction: column; gap: 8px; }
+.bdg { display: inline-flex; align-items: center; gap: 3px; padding: 3px 10px; border-radius: 20px; font-size: 10px; font-weight: 700; white-space: nowrap; }
+.b-vd { background: #eafaf2; color: #0a7a38; }
+.b-co { background: #fef0f2; color: var(--co); }
+.b-az { background: #eaedfa; color: var(--az); }
+.b-am { background: #fffaeb; color: #9a6800; }
+.b-gr { background: var(--bg); color: var(--lbl); }
+.appnav { display: flex; background: var(--wh); border-top: 1px solid var(--bd); flex-shrink: 0; }
+.anav { flex: 1; padding: 10px 4px 12px; border: none; background: transparent; font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 600; color: var(--gt); cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 3px; transition: color .2s; }
+.anav-ico { font-size: 21px; line-height: 1; }
+.anav.on { color: var(--az); }
+.acchdr { display: flex; align-items: center; justify-content: space-between; cursor: pointer; padding: 12px 0; user-select: none; }
+.accico { width: 26px; height: 26px; border-radius: 50%; background: rgba(255,255,255,.15); display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: transform .3s; }
+.accico.card-style { background: var(--bg); }
+.accico.open { transform: rotate(180deg); }
+.accbody { display: none; padding-bottom: 10px; }
+.accbody.open { display: block; }
+input[type=range] { width: 100%; -webkit-appearance: none; height: 5px; border-radius: 5px; background: var(--bd); outline: none; cursor: pointer; }
+input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%; background: var(--co); cursor: pointer; box-shadow: 0 2px 10px rgba(238,66,78,.35); border: 3px solid var(--wh); }
+.crow { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--bg); }
+.crow:last-child { border-bottom: none; }
+.clbl { font-size: 12px; color: var(--gt); font-weight: 500; }
+.cval { font-size: 13px; font-weight: 700; color: var(--dk); }
+.stabs { display: flex; background: var(--bg); border-radius: var(--r12); padding: 3px; gap: 3px; margin-bottom: 12px; }
+.stab { flex: 1; padding: 8px 4px; border: none; border-radius: 10px; background: transparent; font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 700; color: var(--gt); cursor: pointer; transition: all .2s; text-align: center; line-height: 1.4; }
+.stab.on { background: var(--wh); color: var(--az); box-shadow: var(--sh1); }
+.otpw { display: flex; gap: 8px; justify-content: center; margin: 16px 0; }
+.obox { width: 44px; height: 54px; border: 2px solid var(--bd); border-radius: 11px; text-align: center; font-family: 'Montserrat', sans-serif; font-size: 20px; font-weight: 700; color: var(--az); outline: none; transition: all .2s; background: var(--wh); }
+.obox:focus { border-color: var(--co); box-shadow: 0 0 0 3px rgba(238,66,78,.12); }
+.obox.ok { border-color: var(--az); background: #eaedfa; }
+.cki { display: flex; align-items: flex-start; gap: 12px; padding: 13px 0; border-bottom: 1px solid var(--bg); }
+.cki:last-child { border-bottom: none; }
+.cki input { width: 18px; height: 18px; flex-shrink: 0; cursor: pointer; accent-color: var(--az); margin-top: 2px; }
+.cki label { font-size: 13px; color: var(--dk); line-height: 1.5; cursor: pointer; font-weight: 500; }
+.pmr { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--bg); }
+.pmr:last-child { border-bottom: none; }
+.pmico { width: 38px; height: 38px; border-radius: 11px; background: var(--bg); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+.benr { display: flex; align-items: flex-start; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--bg); }
+.benr:last-child { border-bottom: none; }
+.bico { width: 44px; height: 44px; border-radius: 14px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 20px; }
+.bico-az { background: #eaedfa; } .bico-vd { background: #eafaf2; } .bico-co { background: #fef0f2; }
+.rrule { display: flex; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--bg); }
+.rrule:last-child { border-bottom: none; }
+.rdot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
+.dhead { padding: 13px 18px 11px; background: var(--wh); flex-shrink: 0; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--bd); }
+.dscroll { flex: 1; overflow-y: auto; padding-bottom: 24px; scroll-behavior: smooth; }
+.echips { display: flex; gap: 6px; padding: 8px 18px; overflow-x: auto; scrollbar-width: none; flex-shrink: 0; background: var(--wh); border-bottom: 1px solid var(--bg); }
+.echips::-webkit-scrollbar { display: none; }
+.echip { padding: 5px 13px; border-radius: 20px; border: none; font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 700; cursor: pointer; white-space: nowrap; transition: all .2s; }
+.es-vd { background: #eafaf2; color: #0a7a38; }
+.es-am { background: #fffaeb; color: #9a6800; }
+.es-co { background: #fef0f2; color: var(--co); }
+.echip.sel { box-shadow: 0 2px 10px rgba(0,0,0,.15); transform: scale(1.05); }
+.banner { display: flex; gap: 11px; align-items: flex-start; padding: 13px 14px; border-radius: var(--r12); }
+.bn-vd { background: #eafaf2; border-left: 3px solid var(--vd); }
+.bn-am { background: #fffaeb; border-left: 3px solid var(--am); }
+.bn-co { background: #fef0f2; border-left: 3px solid var(--re); }
+.mmet { background: var(--wh); border-radius: var(--r12); padding: 12px; box-shadow: var(--sh0); }
+.g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.pbar { height: 6px; background: var(--bd); border-radius: 6px; overflow: hidden; }
+.pfill { height: 100%; background: var(--grad-s); border-radius: 6px; transition: width .55s; }
+.sub-head { display: flex; align-items: center; gap: 12px; padding: 13px 18px 12px; background: var(--wh); border-bottom: 1px solid var(--bd); flex-shrink: 0; }
+.sub-head-back { width: 34px; height: 34px; border-radius: 50%; border: none; background: var(--bg); cursor: pointer; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: background .15s; }
+.sub-head-back:hover { background: var(--bd); }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.fu { animation: fadeUp .35s ease forwards; }
+@keyframes popIn { 0% { transform: scale(0) rotate(-15deg); opacity: 0; } 75% { transform: scale(1.1) rotate(2deg); } 100% { transform: scale(1) rotate(0); opacity: 1; } }
+.cpop { animation: popIn .5s cubic-bezier(.34,1.56,.64,1) forwards; }
+@keyframes glowPulse { 0%,100% { box-shadow: 0 14px 44px rgba(18,30,108,.35); } 50% { box-shadow: 0 18px 56px rgba(18,30,108,.5), 0 0 0 4px rgba(238,66,78,.08); } }
+.puls { animation: glowPulse 3s ease-in-out infinite; }
+.row { display: flex; align-items: center; justify-content: space-between; }
+@keyframes sheen { 0%,100% { opacity: 0; } 50% { opacity: 1; } }
+</style>
+</head>
+<body>
+
+<div class="dbar">
+  <span class="dbar-lbl">Experiencia</span>
+  <button class="xbtn on" id="xb" onclick="setExp('bullet')">Cupo Bullet</button>
+  <button class="xbtn" id="xt" onclick="setExp('tc')">Cupo TC</button>
+</div>
+
+<div class="phone" id="phone">
+<div class="notch"></div>
+
+<!-- ══════════ S1 · LANDING ══════════ -->
+<div class="screen active" id="s1">
+  <div style="padding:13px 18px 10px;display:flex;justify-content:space-between;align-items:center;background:var(--wh);flex-shrink:0;border-bottom:1px solid var(--bd);">
+    <div>
+      <p style="font-size:19px;font-weight:900;color:var(--az);letter-spacing:-.5px;">bold</p>
+      <p class="t-xs" style="margin-top:1px;">Hola, Juan Carlos 👋</p>
+    </div>
+    <div style="width:36px;height:36px;border-radius:50%;background:var(--grad);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:12px;box-shadow:0 4px 14px rgba(18,30,108,.3);">JC</div>
+  </div>
+  <div style="flex:1;overflow-y:auto;" id="s1-credito">
+    <div style="padding:16px 18px;" class="fu">
+      <div class="gcard puls">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;position:relative;z-index:1;">
+          <span class="t-lbl" style="color:rgba(255,255,255,.52);">💳 Cupo disponible</span>
+          <span id="s1-exp-bdg" class="bdg" style="background:rgba(255,255,255,.15);color:rgba(255,255,255,.9);">Bullet</span>
+        </div>
+        <div style="font-size:44px;font-weight:900;color:#fff;letter-spacing:-2px;line-height:1;margin-bottom:6px;position:relative;z-index:1;">$40.000.000</div>
+        <p style="font-size:12px;color:rgba(255,255,255,.62);margin-bottom:16px;position:relative;z-index:1;">⏰ Válido hasta <strong style="color:rgba(255,255,255,.9);">30 jun 2026</strong></p>
+        <button onclick="goTo('s2')" class="btn btn-p" style="background:rgba(255,255,255,.97);color:var(--az);margin-bottom:14px;position:relative;z-index:1;box-shadow:0 4px 18px rgba(0,0,0,.12);">Quiero mi cupo →</button>
+        <div style="border-top:1px solid rgba(255,255,255,.13);position:relative;z-index:1;">
+          <div class="acchdr" onclick="toggleAcc('acc1','acc1ico')" style="padding:12px 0 0;">
+            <span style="font-size:13px;font-weight:700;color:rgba(255,255,255,.88);">⚡ ¿Por qué es diferente?</span>
+            <div id="acc1ico" class="accico"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></div>
+          </div>
+          <div class="accbody" id="acc1">
+            <div style="display:flex;flex-direction:column;gap:8px;padding:6px 0 2px;">
+              <div style="display:flex;gap:10px;align-items:flex-start;"><span style="font-size:15px;flex-shrink:0;margin-top:1px;">✅</span><p style="font-size:12px;color:rgba(255,255,255,.8);font-weight:500;line-height:1.5;">El 10% de tus ventas con Bold se descuenta automáticamente en cada transacción</p></div>
+              <div style="display:flex;gap:10px;align-items:flex-start;"><span style="font-size:15px;flex-shrink:0;margin-top:1px;">✅</span><p style="font-size:12px;color:rgba(255,255,255,.8);font-weight:500;line-height:1.5;" id="s1-min-txt">En meses de pocas ventas, sólo pagas el mínimo exigible sin entrar en mora</p></div>
+              <div style="display:flex;gap:10px;align-items:flex-start;"><span style="font-size:15px;flex-shrink:0;margin-top:1px;">✅</span><p style="font-size:12px;color:rgba(255,255,255,.8);font-weight:500;line-height:1.5;">Dinero en tu Cuenta Bold el mismo día que firmas</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="s1-ventas" style="flex:1;display:none;align-items:center;justify-content:center;padding:24px;"><div style="text-align:center;"><p style="font-size:40px;">📊</p><p class="t-h2" style="margin-top:12px;">Tus ventas</p></div></div>
+  <div id="s1-cuenta" style="flex:1;display:none;align-items:center;justify-content:center;padding:24px;"><div style="text-align:center;"><p style="font-size:40px;">🏦</p><p class="t-h2" style="margin-top:12px;">Tu cuenta</p></div></div>
+  <div class="appnav">
+    <button class="anav" id="nav-v" onclick="switchTab('ventas')"><span class="anav-ico">📊</span>Ventas</button>
+    <button class="anav" id="nav-c" onclick="switchTab('cuenta')"><span class="anav-ico">🏦</span>Cuenta</button>
+    <button class="anav on" id="nav-cr" onclick="switchTab('credito')"><span class="anav-ico">💳</span>Crédito</button>
+  </div>
+</div>
+
+<!-- ══════════ S2 · BENEFICIOS ══════════ -->
+<div class="screen" id="s2">
+  <div class="pgrow">
+    <button class="pgbk" onclick="goTo('s1')"><svg viewBox="0 0 24 24" fill="none" stroke="#121e6c" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg></button>
+    <div class="pgtrack"><div class="pgfill" style="width:14%"></div></div>
+    <span class="pglbl">1 de 6</span>
+  </div>
+  <div class="sc fu">
+    <p class="t-title" style="margin-bottom:6px;">Cupo Bold trabaja<br>a tu ritmo</p>
+    <p class="t-sm" style="margin-bottom:20px;">No es un crédito convencional. Se adapta a las ventas de tu negocio.</p>
+    <div class="card">
+      <div class="benr"><div class="bico bico-az">📱</div><div><p class="t-head" style="margin-bottom:4px;">Tus ventas pagan por ti</p><p class="t-sm">El 10% de cada venta con Bold se descuenta automáticamente. Sin que hagas nada.</p></div></div>
+      <div class="benr"><div class="bico bico-vd">☂️</div><div><p class="t-head" style="margin-bottom:4px;" id="ben2-title">Nos adaptamos a tus meses malos</p><p class="t-sm" id="ben2-txt">En meses de pocas ventas, sólo pagas el pago mínimo exigible. Esto te ayuda a no entrar en mora en meses donde bajen las ventas.</p></div></div>
+      <div class="benr" style="border-bottom:none;"><div class="bico bico-co">🔄</div><div><p class="t-head" style="margin-bottom:4px;">Vuelve a pedir más dinero</p><p class="t-sm">Al pagar capital, liberas cupo y puedes usarlo nuevamente (Refill).</p></div></div>
+    </div>
+  </div>
+  <div class="bfoot"><button class="btn btn-p" onclick="goTo('s3')">Entendido →</button></div>
+</div>
+
+<!-- ══════════ S3 · SIMULACIÓN ══════════ -->
+<div class="screen" id="s3">
+  <div class="pgrow">
+    <button class="pgbk" onclick="goTo('s2')"><svg viewBox="0 0 24 24" fill="none" stroke="#121e6c" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg></button>
+    <div class="pgtrack"><div class="pgfill" style="width:28%"></div></div>
+    <span class="pglbl">2 de 6</span>
+  </div>
+  <div class="sc fu" style="padding-bottom:0;">
+    <p class="t-h2" style="margin-bottom:4px;">¿Cuánto necesitas hoy?</p>
+    <p class="t-sm" style="margin-bottom:18px;">Elige el monto hasta tu cupo aprobado.</p>
+
+    <div class="card" style="text-align:center;margin-bottom:12px;">
+      <p class="t-lbl" style="margin-bottom:8px;">Monto a desembolsar</p>
+      <div style="font-size:38px;font-weight:900;color:var(--dk);letter-spacing:-1.5px;line-height:1;margin-bottom:12px;">$<span id="s3-amt">40.000.000</span></div>
+      <input type="range" id="s3-sl" min="500000" max="40000000" step="500000" value="40000000" oninput="updAmt(this.value)">
+      <div style="display:flex;justify-content:space-between;margin-top:6px;">
+        <span class="t-lbl">$500.000</span><span class="t-lbl">$40.000.000</span>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:10px;">
+      <p class="t-lbl" style="margin-bottom:10px;">Condiciones del crédito</p>
+      <div class="crow"><span class="clbl">Tasa mensual</span><span class="cval">3,5% M.V.</span></div>
+      <div class="crow"><span class="clbl">Comisión de disponibilidad*</span><span class="cval">$23.800/mes</span></div>
+      <div class="crow" id="row-cap" style="display:none;"><span class="clbl">Capital mínimo mensual</span><span class="cval">2% del saldo</span></div>
+      <div class="crow" style="border-bottom:none;"><span class="clbl">Plazo máximo</span><span class="cval">18 meses</span></div>
+
+      <!-- Pago mínimo esperado — protagonista -->
+      <div style="background:var(--bg);border-radius:var(--r8);padding:14px;margin-top:12px;margin-bottom:10px;">
+        <div class="row">
+          <div>
+            <p style="font-size:10px;font-weight:700;color:var(--lbl);text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px;">Pago mínimo esperado</p>
+            <p class="t-xs">10% de tus ventas mensuales</p>
+          </div>
+          <div style="text-align:right;">
+            <p style="font-size:22px;font-weight:900;color:var(--dk);" id="s3-esp">$5.000.000</p>
+            <p class="t-lbl" style="margin-top:1px;">/mes</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pago mínimo exigible — secundario -->
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:2px 0;">
+        <p class="t-xs">Mínimo exigible si tus ventas caen mucho</p>
+        <p style="font-size:12px;font-weight:700;color:var(--dk);" id="s3-min">$1.423.800</p>
+      </div>
+    </div>
+
+    <div class="card-bg" style="display:flex;gap:10px;align-items:flex-start;margin-bottom:10px;">
+      <span style="font-size:16px;flex-shrink:0;margin-top:1px;">💡</span>
+      <p class="t-xs">Con tus ventas actuales llegarás sin problema al pago esperado. Si algo ocurre, puedes pagar el mínimo exigible y no entrar en mora.</p>
+    </div>
+
+    <p class="t-xs" style="margin-bottom:14px;padding:0 2px;">*La comisión de disponibilidad permite que tengas el cupo activo y solo la pagas si hay deuda activa.</p>
+
+    <!-- Botón: ¿Cuándo me bloquean el Refill? -->
+    <button class="btn btn-flat" onclick="goTo('s12')" style="margin-bottom:12px;">
+      <span>📉</span>
+      <span style="flex:1;text-align:left;">¿Cuándo me bloquean el Refill?</span>
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#121e6c" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+    </button>
+  </div>
+  <div class="bfoot"><button class="btn btn-p" onclick="goTo('s4')">Continuar →</button></div>
+</div>
+
+<!-- ══════════ S4 · MÉTODOS DE RECAUDO ══════════ -->
+<div class="screen" id="s4">
+  <div class="pgrow">
+    <button class="pgbk" onclick="goTo('s3')"><svg viewBox="0 0 24 24" fill="none" stroke="#121e6c" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg></button>
+    <div class="pgtrack"><div class="pgfill" style="width:43%"></div></div>
+    <span class="pglbl">3 de 6</span>
+  </div>
+  <div class="sc fu">
+    <p class="t-h2" style="margin-bottom:5px;">¿Cómo se cobra<br>tu crédito?</p>
+    <p class="t-sm" style="margin-bottom:18px;">Automático en cada venta, manual si quieres adelantar.</p>
+    <div class="card" style="margin-bottom:11px;border:2px solid var(--az);">
+      <div class="row" style="margin-bottom:10px;"><p class="t-head">Descuento de ventas</p><span class="bdg b-az">Principal</span></div>
+      <div class="pmr" style="padding-top:4px;">
+        <div class="pmico" style="background:#eaedfa;">📱</div>
+        <div><p class="t-body">10% sobre todas tus ventas procesadas con Bold</p><p class="t-xs" style="margin-top:3px;">Se aplica en cada transacción. Pago mínimo esperado: <strong style="color:var(--dk);">$5.000.000/mes</strong></p></div>
+      </div>
+    </div>
+    <div class="card" style="margin-bottom:11px;">
+      <p class="t-lbl" style="margin-bottom:12px;">Métodos manuales</p>
+      <div class="pmr"><div class="pmico">🏦</div><div style="flex:1;"><div class="row"><p class="t-body">PSE</p><span class="bdg b-gr">Voluntario</span></div></div></div>
+      <div class="pmr"><div class="pmico">🔁</div><div style="flex:1;"><div class="row"><p class="t-body">Débitos automáticos</p><span class="bdg b-gr">Voluntario</span></div><p class="t-xs" style="margin-top:2px;">Desde tu cuenta Bold o tus cuentas bancarias inscritas</p></div></div>
+      <div class="pmr" style="border-bottom:none;"><div class="pmico">💵</div><div style="flex:1;"><div class="row"><p class="t-body">Efecty / Corresponsal</p><span class="bdg b-gr">Voluntario</span></div></div></div>
+    </div>
+    <div class="card" style="padding:0 16px;">
+      <div class="acchdr" onclick="toggleAcc('risk-b','risk-ico')">
+        <div style="display:flex;align-items:center;gap:9px;"><span style="font-size:16px;">📉</span><p class="t-body">¿Cómo entro en mora?</p></div>
+        <div class="accico card-style" id="risk-ico"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#121e6c" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></div>
+      </div>
+      <div class="accbody" id="risk-b">
+        <p class="t-xs" style="margin-bottom:12px;">Monitoreamos tus ventas mes a mes. Si bajan mucho, actuamos:</p>
+        <div class="rrule">
+          <div class="rdot" style="background:var(--am);"></div>
+          <div><p class="t-body" style="color:var(--am);margin-bottom:2px;">2 meses bajando → Refill bloqueado</p><p class="t-xs">Pausamos tu acceso a más cupo hasta que las ventas se recuperen.</p></div>
+        </div>
+        <div class="rrule" style="border-bottom:none;">
+          <div class="rdot" style="background:var(--re);"></div>
+          <div><p class="t-body" style="color:var(--re);margin-bottom:2px;">4 meses bajando → Deuda acelerada</p><p class="t-xs" id="risk-txt">Exigimos el capital pendiente de inmediato.</p></div>
+        </div>
+        <p class="t-xs" style="padding:10px 0 4px;">Lo verás en tiempo real en tu dashboard.</p>
+      </div>
+    </div>
+    <p class="t-xs" style="padding:12px 2px 0;">*Este crédito está pensado para pagarse en máximo 18 meses. Si vemos que no vas a lograrlo, aceleraremos el cobro del capital pendiente.</p>
+  </div>
+  <div class="bfoot"><button class="btn btn-p" onclick="goTo('s5')">Continuar →</button></div>
+</div>
+
+<!-- ══════════ S5 · TÉRMINOS ══════════ -->
+<div class="screen" id="s5">
+  <div class="pgrow">
+    <button class="pgbk" onclick="goTo('s4')"><svg viewBox="0 0 24 24" fill="none" stroke="#121e6c" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg></button>
+    <div class="pgtrack"><div class="pgfill" style="width:57%"></div></div>
+    <span class="pglbl">4 de 6</span>
+  </div>
+  <div class="sc fu">
+    <p class="t-h2" style="margin-bottom:5px;">Términos y<br>autorizaciones</p>
+    <p class="t-sm" style="margin-bottom:18px;">Acepta cada punto para activar tu crédito.</p>
+    <div class="card">
+      <div class="cki"><input type="checkbox" id="ck1" onchange="chkT()"><label for="ck1"><strong>Términos y condiciones</strong> del Cupo Bold.</label></div>
+      <div class="cki"><input type="checkbox" id="ck2" onchange="chkT()"><label for="ck2"><strong>Pagaré en Blanco</strong> con Carta de Instrucciones.</label></div>
+      <div class="cki"><input type="checkbox" id="ck3" onchange="chkT()"><label for="ck3">Autorizo <strong>débitos automáticos</strong> de mi cuenta inscrita.</label></div>
+      <div class="cki"><input type="checkbox" id="ck4" onchange="chkT()"><label for="ck4">Los recursos serán <strong>destinados a mi negocio</strong>.</label></div>
+      <div class="cki" style="border-bottom:none;"><input type="checkbox" id="ck5" onchange="chkT()"><label for="ck5">Autorizo el <strong>tratamiento de mis datos</strong> personales.</label></div>
+    </div>
+    <div style="display:flex;align-items:center;gap:8px;padding:10px 2px 0;">
+      <div id="ck-dot" style="width:7px;height:7px;border-radius:50%;background:var(--bd);transition:background .3s;flex-shrink:0;"></div>
+      <p id="ck-msg" class="t-xs">Acepta todos los puntos para continuar</p>
+    </div>
+  </div>
+  <div class="bfoot"><button class="btn btn-p" id="btn-sol" disabled onclick="goTo('s6')">Solicitar $<span id="btn-m">40.000.000</span></button></div>
+</div>
+
+<!-- ══════════ S6 · OTP ══════════ -->
+<div class="screen" id="s6">
+  <div class="pgrow">
+    <button class="pgbk" onclick="goTo('s5')"><svg viewBox="0 0 24 24" fill="none" stroke="#121e6c" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg></button>
+    <div class="pgtrack"><div class="pgfill" style="width:72%"></div></div>
+    <span class="pglbl">5 de 6</span>
+  </div>
+  <div class="sc fu" style="align-items:center;text-align:center;padding-top:20px;">
+    <div style="font-size:56px;margin-bottom:14px;">💬</div>
+    <p class="t-title" style="font-size:22px;">Confirma tu firma</p>
+    <p class="t-sm" style="margin:6px 0 18px;">Revisamos que eres tú.</p>
+    <div class="card-bg" style="width:100%;text-align:left;display:flex;gap:11px;align-items:flex-start;margin-bottom:4px;">
+      <span style="font-size:20px;flex-shrink:0;">📲</span>
+      <p class="t-sm">Enviamos un código de <strong>6 dígitos por WhatsApp</strong> al número <strong>***-***-4521</strong>.</p>
+    </div>
+    <div class="otpw">
+      <input type="text" maxlength="1" class="obox" id="o0" oninput="oi(0)" onkeydown="ok(event,0)">
+      <input type="text" maxlength="1" class="obox" id="o1" oninput="oi(1)" onkeydown="ok(event,1)">
+      <input type="text" maxlength="1" class="obox" id="o2" oninput="oi(2)" onkeydown="ok(event,2)">
+      <input type="text" maxlength="1" class="obox" id="o3" oninput="oi(3)" onkeydown="ok(event,3)">
+      <input type="text" maxlength="1" class="obox" id="o4" oninput="oi(4)" onkeydown="ok(event,4)">
+      <input type="text" maxlength="1" class="obox" id="o5" oninput="oi(5)" onkeydown="ok(event,5)">
+    </div>
+    <p class="t-xs" id="otp-hint">Ingresa cualquier 6 dígitos (prototipo)</p>
+    <div style="margin-top:14px;"><span class="t-xs">¿No lo recibiste? </span><button id="resend-btn" onclick="startTimer()" style="border:none;background:none;color:var(--co);font-size:11px;font-weight:700;cursor:pointer;font-family:'Montserrat',sans-serif;">Reenviar (60s)</button></div>
+  </div>
+  <div class="bfoot"><button class="btn btn-p" id="btn-otp" disabled onclick="goTo('s7')">Confirmar y firmar →</button></div>
+</div>
+
+<!-- ══════════ S7 · ÉXITO ══════════ -->
+<div class="screen" id="s7">
+  <div class="pgrow" style="justify-content:flex-end;">
+    <div class="pgtrack"><div class="pgfill" style="width:88%"></div></div>
+    <span class="pglbl">6 de 6</span>
+  </div>
+  <div class="sc fu" style="align-items:center;text-align:center;padding-top:18px;">
+    <div style="width:80px;height:80px;background:var(--grad);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:34px;color:#fff;box-shadow:0 12px 38px rgba(18,30,108,.3);margin-bottom:18px;" class="cpop">✓</div>
+    <p class="t-title" style="font-size:24px;">¡Listo! Tu dinero<br>está en camino</p>
+    <p class="t-sm" style="margin:6px 0 18px;">Llegará a tu Cuenta Bold en minutos.</p>
+    <div class="gcard" style="width:100%;text-align:left;margin-bottom:16px;">
+      <p class="t-lbl" style="color:rgba(255,255,255,.52);margin-bottom:5px;">Monto desembolsado</p>
+      <div style="font-size:34px;font-weight:900;color:#fff;letter-spacing:-1px;margin-bottom:7px;">$<span id="s7-m">40.000.000</span></div>
+      <p style="font-size:11px;color:rgba(255,255,255,.6);">Próximo corte: <strong style="color:rgba(255,255,255,.9);">5 jul 2026</strong></p>
+    </div>
+    <div style="width:100%;text-align:left;">
+      <p class="t-lbl" style="margin-bottom:10px;">Métodos habilitados</p>
+      <div class="card">
+        <div class="pmr"><div class="pmico" style="background:#eaedfa;">📱</div><div style="flex:1;"><p class="t-body">Descuento automático</p><p class="t-xs" style="margin-top:2px;">10% en cada venta con Bold</p></div><span class="bdg b-az">Activo</span></div>
+        <div class="pmr"><div class="pmico">🔁</div><div style="flex:1;"><p class="t-body">Débitos automáticos</p><p class="t-xs" style="margin-top:2px;">Cuenta Bold o bancos inscritos</p></div><span class="bdg b-gr">Habilitado</span></div>
+        <div class="pmr" style="border-bottom:none;"><div class="pmico">🏦</div><div style="flex:1;"><p class="t-body">PSE</p><p class="t-xs" style="margin-top:2px;">Pago voluntario en línea</p></div><span class="bdg b-gr">Habilitado</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="bfoot"><button class="btn btn-p" onclick="goTo('s8');initDash();">Ver mi crédito →</button></div>
+</div>
+
+<!-- ══════════ S8 · DASHBOARD ══════════ -->
+<div class="screen" id="s8">
+  <div class="dhead">
+    <div><p style="font-size:17px;font-weight:900;color:var(--az);letter-spacing:-.4px;">bold</p><p class="t-xs" style="margin-top:1px;">Mi Cupo Bold</p></div>
+    <div id="d-badge" class="bdg b-vd">● Al día</div>
+  </div>
+  <div class="echips">
+    <button class="echip es-vd sel" onclick="setDash('s')">● Saludable</button>
+    <button class="echip es-am" onclick="setDash('a')">⚠ Alerta</button>
+    <button class="echip es-co" onclick="setDash('m')">↑ Aceleración</button>
+  </div>
+  <div class="dscroll" id="d-scroll">
+
+    <!-- ZONA 1: Cupo & Refill — tarjeta blanca -->
+    <div style="padding:16px 18px 0;">
+      <div class="card" style="margin-bottom:14px;">
+        <div class="row" style="margin-bottom:12px;">
+          <p class="t-body">Mi Cupo Bold</p>
+          <div id="d-badge2" class="bdg b-vd">● Al día</div>
+        </div>
+        <div style="display:flex;gap:8px;margin-bottom:10px;">
+          <div style="flex:1;background:var(--bg);border-radius:var(--r8);padding:10px;text-align:center;">
+            <p class="t-lbl" style="margin-bottom:3px;">Total</p>
+            <p style="font-size:15px;font-weight:900;color:var(--dk);">$40M</p>
+          </div>
+          <div style="flex:1;background:var(--bg);border-radius:var(--r8);padding:10px;text-align:center;">
+            <p class="t-lbl" style="margin-bottom:3px;">Usado</p>
+            <p style="font-size:15px;font-weight:900;color:var(--dk);" id="d-usado">$40M</p>
+          </div>
+          <div style="flex:1;background:var(--bg);border-radius:var(--r8);padding:10px;text-align:center;">
+            <p class="t-lbl" style="margin-bottom:3px;">Disponible</p>
+            <p style="font-size:15px;font-weight:900;color:var(--dk);" id="d-disp">$0</p>
+          </div>
+        </div>
+        <div class="pbar" style="margin-bottom:12px;"><div id="d-cupobar" class="pfill" style="width:100%;"></div></div>
+        <button id="d-refill" onclick="doRefill()" class="btn btn-p" style="padding:13px;font-size:13px;">
+          <span>🔄</span> Usar mi cupo (Refill)
+        </button>
+        <p class="t-lbl" style="color:var(--gt);text-align:center;margin-top:7px;" id="d-refill-note">$0 disponibles</p>
+      </div>
+
+      <!-- Banner estado -->
+      <div id="d-banner" class="banner bn-vd" style="margin-bottom:14px;">
+        <span style="font-size:20px;" id="d-ban-ico">✅</span>
+        <div><p class="t-body" id="d-ban-t">Tu crédito está al día</p><p class="t-xs" id="d-ban-s" style="margin-top:2px;">Tus ventas cubren el pago mínimo esperado.</p></div>
+      </div>
+    </div>
+
+    <!-- ZONA 2: Estado del crédito -->
+    <div style="padding:0 18px;">
+      <div class="card" style="margin-bottom:14px;">
+        <div class="row" style="margin-bottom:8px;">
+          <p class="t-body">Estado del crédito</p>
+          <span style="font-size:12px;font-weight:800;color:var(--dk);" id="d-pct">5% pagado</span>
+        </div>
+        <div class="pbar" style="margin-bottom:14px;"><div class="pfill" id="d-prog" style="width:5%;"></div></div>
+        <div class="g2" style="margin-bottom:14px;">
+          <div class="mmet"><p class="t-lbl" style="margin-bottom:4px;">Saldo actual</p><p style="font-size:16px;font-weight:900;color:var(--dk);" id="d-saldo">$38.000.000</p></div>
+          <div class="mmet"><p class="t-lbl" style="margin-bottom:4px;">Ya abonado</p><p style="font-size:16px;font-weight:900;color:var(--dk);" id="d-pagado">$2.000.000</p></div>
+          <div class="mmet"><p class="t-lbl" style="margin-bottom:4px;">Meses restantes</p><p style="font-size:16px;font-weight:900;color:var(--dk);" id="d-meses">17 meses</p></div>
+          <div class="mmet"><p class="t-lbl" style="margin-bottom:4px;">Vence</p><p style="font-size:16px;font-weight:900;color:var(--dk);">Dic 2027</p></div>
+        </div>
+        <div class="card-am" style="margin-bottom:12px;">
+          <div class="row">
+            <div><p class="t-lbl" style="color:var(--am);margin-bottom:3px;">Cuota final proyectada (mes 18)</p><p class="t-xs" id="d-c18-lbl" style="margin-top:1px;">Capital acumulado pendiente</p></div>
+            <p style="font-size:18px;font-weight:900;color:var(--dk);" id="d-c18">—</p>
+          </div>
+        </div>
+        <p class="t-lbl" style="margin-bottom:8px;">Este mes</p>
+        <div style="display:flex;gap:8px;">
+          <div style="flex:1;background:var(--bg);border-radius:var(--r8);padding:11px;text-align:center;">
+            <p class="t-lbl" style="margin-bottom:4px;">Pago esperado</p>
+            <p style="font-size:15px;font-weight:900;color:var(--dk);" id="d-esp-val">$5.000.000</p>
+            <p class="t-xs" style="margin-top:2px;">10% de ventas</p>
+          </div>
+          <div style="flex:1;background:var(--bg);border-radius:var(--r8);padding:11px;text-align:center;">
+            <p class="t-lbl" style="margin-bottom:4px;">Mínimo exigible</p>
+            <p style="font-size:15px;font-weight:900;color:var(--dk);" id="d-min-val">$1.423.800</p>
+            <p class="t-xs" style="margin-top:2px;">Si ventas bajan</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ZONA 3: Herramientas -->
+    <div style="padding:0 18px 24px;">
+      <p class="t-lbl" style="margin-bottom:12px;">Herramientas</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;">
+        <button onclick="goTo('s9');buildHist();" style="background:var(--wh);border:1.5px solid var(--bd);border-radius:var(--r16);padding:18px 8px 16px;display:flex;flex-direction:column;align-items:center;gap:10px;cursor:pointer;box-shadow:var(--sh0);transition:all .18s;font-family:'Montserrat',sans-serif;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">
+          <span style="font-size:28px;line-height:1;">📋</span>
+          <span style="font-size:12px;font-weight:800;color:var(--az);text-align:center;line-height:1.2;">Historial</span>
+        </button>
+        <button onclick="goTo('s10');setPct(10);" style="background:var(--wh);border:1.5px solid var(--bd);border-radius:var(--r16);padding:18px 8px 16px;display:flex;flex-direction:column;align-items:center;gap:10px;cursor:pointer;box-shadow:var(--sh0);transition:all .18s;font-family:'Montserrat',sans-serif;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">
+          <span style="font-size:28px;font-weight:900;color:var(--az);line-height:1;">%</span>
+          <span style="font-size:12px;font-weight:800;color:var(--az);text-align:center;line-height:1.2;">Descuento</span>
+        </button>
+        <button onclick="goTo('s11');drawVentasChart(currentDashState);" style="background:var(--wh);border:1.5px solid var(--bd);border-radius:var(--r16);padding:18px 8px 16px;display:flex;flex-direction:column;align-items:center;gap:10px;cursor:pointer;box-shadow:var(--sh0);transition:all .18s;font-family:'Montserrat',sans-serif;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">
+          <span style="font-size:28px;line-height:1;">📊</span>
+          <span style="font-size:12px;font-weight:800;color:var(--az);text-align:center;line-height:1.2;">Ventas</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ S9 · HISTORIAL ══════════ -->
+<div class="screen" id="s9">
+  <div class="sub-head">
+    <button class="sub-head-back" onclick="goTo('s8')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#121e6c" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg></button>
+    <div><p class="t-head">Historial de transacciones</p><p class="t-xs" style="margin-top:1px;">Desglose mes a mes</p></div>
+  </div>
+  <div style="flex:1;overflow-y:auto;padding:16px 18px 24px;" class="fu">
+    <div class="card-vd" style="margin-bottom:14px;">
+      <p class="t-lbl" style="color:#0a7a38;margin-bottom:7px;">Resumen — mes actual</p>
+      <p class="t-xs" style="line-height:2;">
+        Ventas procesadas: <strong style="color:var(--dk);">$50.000.000</strong><br>
+        Descuento aplicado (10%): <strong style="color:var(--dk);">$5.000.000</strong><br>
+        → Interés: <strong style="color:var(--dk);">$<span id="hs-int">—</span></strong> · Comisión: <strong style="color:var(--dk);">$23.800</strong> · Capital: <strong style="color:var(--dk);">$<span id="hs-cap">—</span></strong><br>
+        Cuota proyectada mes 18: <strong style="color:var(--dk);" id="hs-c18">—</strong>
+      </p>
+    </div>
+    <div class="card" style="padding:0;overflow:hidden;">
+      <div style="overflow-x:auto;">
+        <table style="width:100%;border-collapse:collapse;font-size:11px;">
+          <thead>
+            <tr style="background:var(--az);">
+              <th style="padding:9px 10px;text-align:left;color:rgba(255,255,255,.7);font-weight:700;">Mes</th>
+              <th style="padding:9px 7px;text-align:right;color:rgba(255,255,255,.7);font-weight:700;">Abono</th>
+              <th style="padding:9px 7px;text-align:right;color:#ffd580;font-weight:700;">Interés</th>
+              <th style="padding:9px 7px;text-align:right;color:rgba(255,255,255,.6);font-weight:700;">Comisión</th>
+              <th style="padding:9px 7px;text-align:right;color:#7effc0;font-weight:700;">Capital</th>
+              <th style="padding:9px 10px;text-align:right;color:#fff;font-weight:700;">Saldo</th>
+            </tr>
+          </thead>
+          <tbody id="hist-body"></tbody>
+        </table>
+      </div>
+    </div>
+    <button class="btn btn-flat" onclick="dlExcel()" style="margin-top:14px;"><span>📥</span> Descargar estado de cuenta</button>
+  </div>
+</div>
+
+<!-- ══════════ S10 · % DESCUENTO ══════════ -->
+<div class="screen" id="s10">
+  <div class="sub-head">
+    <button class="sub-head-back" onclick="goTo('s8')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#121e6c" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg></button>
+    <div><p class="t-head">% de descuento de ventas</p><p class="t-xs" style="margin-top:1px;">Retención sobre ventas con Bold</p></div>
+  </div>
+  <div style="flex:1;overflow-y:auto;padding:20px 18px 24px;" class="fu">
+    <div style="text-align:center;margin-bottom:20px;">
+      <p class="t-lbl" style="margin-bottom:8px;">Retención actual</p>
+      <p style="font-size:72px;font-weight:900;color:var(--dk);letter-spacing:-3px;line-height:1;" id="pct-display">10%</p>
+      <p class="t-sm" style="margin-top:6px;color:var(--gt);">de cada venta procesada con Bold</p>
+    </div>
+    <div class="card" style="margin-bottom:12px;">
+      <p class="t-lbl" style="margin-bottom:12px;">Cambiar porcentaje</p>
+      <div class="stabs">
+        <button class="stab on" id="p10" onclick="setPct(10)">10%</button>
+        <button class="stab" id="p15" onclick="setPct(15)">15%</button>
+        <button class="stab" id="p20" onclick="setPct(20)">20%</button>
+      </div>
+      <div style="background:var(--bg);border-radius:var(--r8);padding:13px;margin-top:4px;">
+        <p class="t-lbl" style="margin-bottom:5px;">Impacto en tu crédito</p>
+        <p class="t-sm" id="pct-msg" style="color:var(--dk);font-weight:700;">Con 10% terminarías en ~10 meses</p>
+        <p class="t-xs" style="margin-top:3px;">Ventas base estimadas: <strong>$50.000.000/mes</strong></p>
+      </div>
+    </div>
+    <div class="card-bg" style="display:flex;gap:10px;align-items:flex-start;margin-bottom:16px;">
+      <span style="font-size:16px;flex-shrink:0;margin-top:1px;">💡</span>
+      <p class="t-xs">Un porcentaje mayor acelera el pago y reduce el interés total. Puedes cambiarlo enviando una solicitud.</p>
+    </div>
+    <button class="btn btn-p" onclick="reqPct()">Solicitar cambio de porcentaje</button>
+  </div>
+</div>
+
+<!-- ══════════ S11 · SEGUIMIENTO DE VENTAS ══════════ -->
+<div class="screen" id="s11">
+  <div class="sub-head">
+    <button class="sub-head-back" onclick="goTo('s8')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#121e6c" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg></button>
+    <div><p class="t-head">Seguimiento de ventas</p><p class="t-xs" style="margin-top:1px;">Estado y tendencia mensual</p></div>
+  </div>
+  <div style="flex:1;overflow-y:auto;padding:16px 18px 24px;" class="fu">
+
+    <!-- Tarjeta de estado actual -->
+    <div id="s11-state-card" class="banner bn-vd" style="margin-bottom:14px;">
+      <span style="font-size:22px;" id="s11-ico">✅</span>
+      <div>
+        <p class="t-body" id="s11-titulo">Ventas saludables</p>
+        <p class="t-xs" id="s11-desc" style="margin-top:2px;">Tus ventas cubren el pago esperado. Refill activo.</p>
+      </div>
+    </div>
+
+    <!-- Gráfica dinámica -->
+    <div class="card" style="padding:14px 12px 10px;margin-bottom:12px;">
+      <p class="t-lbl" style="margin-bottom:2px;">Retención mensual vs. pago esperado</p>
+      <p class="t-xs" style="margin-bottom:10px;">Pago esperado: <strong style="color:var(--dk);">$5.000.000/mes</strong></p>
+      <svg id="s11-chart" viewBox="0 0 322 160" style="width:100%;height:auto;display:block;"></svg>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:10px;">
+        <div style="display:flex;align-items:center;gap:5px;"><div style="width:16px;height:3px;background:#0ea84a;border-radius:2px;"></div><span class="t-xs">Normal</span></div>
+        <div style="display:flex;align-items:center;gap:5px;"><div style="width:16px;height:3px;background:#d98b00;border-radius:2px;"></div><span class="t-xs">🔒 2 meses → Refill</span></div>
+        <div style="display:flex;align-items:center;gap:5px;"><div style="width:16px;height:3px;background:#cc2233;border-radius:2px;"></div><span class="t-xs">⚡ 4 meses → Aceleración</span></div>
+        <div style="display:flex;align-items:center;gap:5px;"><div style="width:20px;height:0;border-top:2px dashed #5a7ff0;"></div><span class="t-xs">Pago esperado</span></div>
+      </div>
+    </div>
+
+    <!-- Tabla de datos -->
+    <div class="card" style="padding:0;overflow:hidden;">
+      <div style="overflow-x:auto;">
+        <table id="s11-table" style="width:100%;border-collapse:collapse;font-size:10px;min-width:290px;">
+          <thead>
+            <tr style="background:var(--az);">
+              <th style="padding:7px 8px;text-align:left;color:rgba(255,255,255,.7);font-weight:700;">Mes</th>
+              <th style="padding:7px 6px;text-align:right;color:rgba(255,255,255,.7);font-weight:700;">Ventas</th>
+              <th style="padding:7px 6px;text-align:right;color:#7effc0;font-weight:700;">Ret. 10%</th>
+              <th style="padding:7px 8px;text-align:right;color:rgba(255,255,255,.7);font-weight:700;">Saldo</th>
+            </tr>
+          </thead>
+          <tbody id="s11-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ S12 · ¿CUÁNDO ME BLOQUEAN EL REFILL? ══════════ -->
+<div class="screen" id="s12">
+  <div class="sub-head">
+    <button class="sub-head-back" onclick="goTo('s3')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#121e6c" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg></button>
+    <div><p class="t-head">Seguimiento de tus ventas</p><p class="t-xs" style="margin-top:1px;">Así monitoreamos tu crédito</p></div>
+  </div>
+  <div style="flex:1;overflow-y:auto;padding:16px 18px 24px;" class="fu">
+
+    <p class="t-h2" style="margin-bottom:6px;font-size:17px;">Monitoreamos tus ventas<br>mes a mes</p>
+    <p class="t-sm" style="margin-bottom:16px;">Si bajan mucho, actuamos para proteger el crédito de ambos.</p>
+
+    <!-- Chart educativo — siempre muestra el escenario completo 8 meses -->
+    <div class="card" style="padding:14px 12px 10px;margin-bottom:14px;">
+      <p class="t-lbl" style="margin-bottom:2px;">Retención mensual vs. pago esperado</p>
+      <p class="t-xs" style="margin-bottom:10px;">Ejemplo: ventas normales ~$55M/mes · retención 10%</p>
+      <svg id="s12-chart" viewBox="0 0 322 160" style="width:100%;height:auto;display:block;"></svg>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:10px;">
+        <div style="display:flex;align-items:center;gap:5px;"><div style="width:16px;height:3px;background:#0ea84a;border-radius:2px;"></div><span class="t-xs">Normal</span></div>
+        <div style="display:flex;align-items:center;gap:5px;"><div style="width:16px;height:3px;background:#d98b00;border-radius:2px;"></div><span class="t-xs">Alerta (2 meses)</span></div>
+        <div style="display:flex;align-items:center;gap:5px;"><div style="width:16px;height:3px;background:#cc2233;border-radius:2px;"></div><span class="t-xs">Incumplimiento (4 meses)</span></div>
+        <div style="display:flex;align-items:center;gap:5px;"><div style="width:20px;height:0;border-top:2px dashed #5a7ff0;"></div><span class="t-xs">Pago esperado $5M</span></div>
+      </div>
+    </div>
+
+    <!-- 3 tarjetas explicativas -->
+    <div class="card-vd" style="margin-bottom:8px;display:flex;gap:12px;align-items:flex-start;">
+      <span style="font-size:20px;flex-shrink:0;margin-top:1px;">🟢</span>
+      <div><p class="t-body" style="color:#0a7a38;margin-bottom:3px;">Ventas estables</p><p class="t-xs" style="color:#0a7a38;">Tu retención cubre el pago esperado. Refill activo y sin novedades.</p></div>
+    </div>
+    <div class="card-am" style="margin-bottom:8px;display:flex;gap:12px;align-items:flex-start;">
+      <span style="font-size:20px;flex-shrink:0;margin-top:1px;">🔒</span>
+      <div><p class="t-body" style="color:#9a6800;margin-bottom:3px;">2 meses bajo lo esperado → Refill bloqueado</p><p class="t-xs" style="color:#9a6800;">Pausamos el acceso a más cupo. Se reactiva cuando las ventas se recuperen.</p></div>
+    </div>
+    <div class="card-co" style="margin-bottom:14px;display:flex;gap:12px;align-items:flex-start;">
+      <span style="font-size:20px;flex-shrink:0;margin-top:1px;">⚡</span>
+      <div><p class="t-body" style="color:var(--re);margin-bottom:3px;">4 meses bajo lo esperado → Deuda acelerada</p><p class="t-xs" style="color:var(--re);">Exigimos el capital pendiente de inmediato.</p></div>
+    </div>
+
+    <!-- Tabla ejemplo -->
+    <div class="card" style="padding:0;overflow:hidden;margin-bottom:14px;">
+      <div style="overflow-x:auto;">
+        <table style="width:100%;border-collapse:collapse;font-size:10px;min-width:290px;">
+          <thead>
+            <tr style="background:var(--az);">
+              <th style="padding:7px 8px;text-align:left;color:rgba(255,255,255,.7);font-weight:700;">Mes</th>
+              <th style="padding:7px 6px;text-align:right;color:rgba(255,255,255,.7);font-weight:700;">Ventas</th>
+              <th style="padding:7px 6px;text-align:right;color:#7effc0;font-weight:700;">Ret. 10%</th>
+              <th style="padding:7px 8px;text-align:right;color:rgba(255,255,255,.7);font-weight:700;">Saldo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="background:#eafaf2;"><td style="padding:7px 8px;color:#0a7a38;font-weight:700;">M1</td><td style="padding:7px 6px;text-align:right;color:var(--dk);font-weight:600;">$55M</td><td style="padding:7px 6px;text-align:right;color:#0a7a38;font-weight:700;">$5,5M</td><td style="padding:7px 8px;text-align:right;color:var(--dk);font-weight:600;">$36M</td></tr>
+            <tr style="background:#fff;"><td style="padding:7px 8px;color:#0a7a38;font-weight:700;">M2</td><td style="padding:7px 6px;text-align:right;color:var(--dk);font-weight:600;">$58M</td><td style="padding:7px 6px;text-align:right;color:#0a7a38;font-weight:700;">$5,8M</td><td style="padding:7px 8px;text-align:right;color:var(--dk);font-weight:600;">$31M</td></tr>
+            <tr style="background:#eafaf2;"><td style="padding:7px 8px;color:#0a7a38;font-weight:700;">M3</td><td style="padding:7px 6px;text-align:right;color:var(--dk);font-weight:600;">$55M</td><td style="padding:7px 6px;text-align:right;color:#0a7a38;font-weight:700;">$5,5M</td><td style="padding:7px 8px;text-align:right;color:var(--dk);font-weight:600;">$27M</td></tr>
+            <tr style="background:#fff;"><td style="padding:7px 8px;color:#0a7a38;font-weight:700;">M4</td><td style="padding:7px 6px;text-align:right;color:var(--dk);font-weight:600;">$56M</td><td style="padding:7px 6px;text-align:right;color:#0a7a38;font-weight:700;">$5,6M</td><td style="padding:7px 8px;text-align:right;color:var(--dk);font-weight:600;">$22M</td></tr>
+            <tr style="background:#fffaeb;"><td style="padding:7px 8px;color:#9a6800;font-weight:700;">M5 ⚠️</td><td style="padding:7px 6px;text-align:right;color:var(--dk);font-weight:600;">$38M</td><td style="padding:7px 6px;text-align:right;color:#9a6800;font-weight:700;">$3,8M</td><td style="padding:7px 8px;text-align:right;color:var(--dk);font-weight:600;">$19M</td></tr>
+            <tr style="background:#fffaeb;"><td style="padding:7px 8px;color:#9a6800;font-weight:700;">M6 🔒</td><td style="padding:7px 6px;text-align:right;color:var(--dk);font-weight:600;">$27M</td><td style="padding:7px 6px;text-align:right;color:#9a6800;font-weight:700;">$2,7M</td><td style="padding:7px 8px;text-align:right;color:var(--dk);font-weight:600;">$17M</td></tr>
+            <tr style="background:#fef0f2;"><td style="padding:7px 8px;color:var(--re);font-weight:700;">M7</td><td style="padding:7px 6px;text-align:right;color:var(--dk);font-weight:600;">$19M</td><td style="padding:7px 6px;text-align:right;color:var(--re);font-weight:700;">$1,9M</td><td style="padding:7px 8px;text-align:right;color:var(--dk);font-weight:600;">$16M</td></tr>
+            <tr style="background:#fef0f2;"><td style="padding:7px 8px;color:var(--re);font-weight:700;">M8 ⚡</td><td style="padding:7px 6px;text-align:right;color:var(--dk);font-weight:600;">$13M</td><td style="padding:7px 6px;text-align:right;color:var(--re);font-weight:700;">$1,3M</td><td style="padding:7px 8px;text-align:right;color:var(--dk);font-weight:600;">$15M</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <p class="t-xs" style="padding:0 2px;margin-bottom:16px;">*Lo verás en tiempo real desde tu dashboard. Si las ventas mejoran, el Refill se reactiva automáticamente.</p>
+  </div>
+  <div class="bfoot"><button class="btn btn-p" onclick="goTo('s3')">Entendido →</button></div>
+</div>
+
+</div><!-- /phone -->
+
+<script>
+const $ = id => document.getElementById(id);
+const f = n => new Intl.NumberFormat('es-CO').format(Math.round(n));
+
+let AMT = 40000000;
+let EXP = 'bullet';
+const RATE   = 0.035;
+const COMM   = 23800;
+const CAP_TC = 0.02;
+const TPV_MO = 50000000;
+const DISC   = 0.10;
+let currentDashState = 's';
+
+/* ═══ EXPERIENCE ═══ */
+function setExp(e) {
+  EXP = e;
+  $('xb').classList.toggle('on', e === 'bullet');
+  $('xt').classList.toggle('on', e === 'tc');
+  $('s1-exp-bdg').textContent = e === 'bullet' ? 'Bullet' : 'TC';
+  if (e === 'tc') {
+    $('ben2-txt').textContent = 'En meses de pocas ventas, pagas 2% del saldo + interés + comisión. Esto te ayuda a no entrar en mora cuando las ventas bajen.';
+    $('s1-min-txt').textContent = 'En meses de pocas ventas, pagas 2% saldo + interés + comisión';
+    if ($('row-cap'))  $('row-cap').style.display = 'flex';
+    if ($('risk-txt')) $('risk-txt').textContent  = 'Exigimos el capital pendiente de inmediato.';
+  } else {
+    $('ben2-txt').textContent = 'En meses de pocas ventas, sólo pagas el pago mínimo exigible. Esto te ayuda a no entrar en mora en meses donde bajen las ventas.';
+    $('s1-min-txt').textContent = 'En meses de pocas ventas, sólo pagas el mínimo exigible sin entrar en mora';
+    if ($('row-cap'))  $('row-cap').style.display = 'none';
+    if ($('risk-txt')) $('risk-txt').textContent  = 'Exigimos el capital pendiente de inmediato.';
+  }
+  updAmt(AMT);
+}
+
+/* ═══ NAVIGATION ═══ */
+function goTo(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  const t = $(id); t.classList.add('active'); t.scrollTop = 0;
+}
+function switchTab(t) {
+  $('s1-credito').style.display = t==='credito'?'block':'none';
+  $('s1-ventas').style.display   = t==='ventas'?'flex':'none';
+  $('s1-cuenta').style.display   = t==='cuenta'?'flex':'none';
+  ['nav-v','nav-c','nav-cr'].forEach(id => $(id).classList.remove('on'));
+  ({'ventas':'nav-v','cuenta':'nav-c','credito':'nav-cr'})[t] &&
+    $(({'ventas':'nav-v','cuenta':'nav-c','credito':'nav-cr'})[t]).classList.add('on');
+}
+function toggleAcc(bid, iid) {
+  $(bid).classList.toggle('open');
+  $(iid).classList.toggle('open');
+}
+
+/* ═══ AMOUNT ═══ */
+function updAmt(val) {
+  AMT = parseInt(val);
+  const fv = f(AMT);
+  if ($('s3-amt')) $('s3-amt').textContent = fv;
+  if ($('s3-sl')) {
+    $('s3-sl').value = AMT;
+    const p = ((AMT-500000)/(40000000-500000))*100;
+    $('s3-sl').style.background = `linear-gradient(to right,#ee424e ${p}%,#dde0ee ${p}%)`;
+  }
+  if ($('btn-m')) $('btn-m').textContent = fv;
+  if ($('s7-m'))  $('s7-m').textContent  = fv;
+  const minB  = AMT*RATE+COMM;
+  const minTC = AMT*(RATE+CAP_TC)+COMM;
+  const minShow = EXP==='tc' ? minTC : minB;
+  if ($('s3-min'))    $('s3-min').textContent    = '$'+f(minShow);
+  if ($('d-min-val')) $('d-min-val').textContent = '$'+f(minShow);
+  const esp = TPV_MO*DISC;
+  if ($('s3-esp'))    $('s3-esp').textContent    = '$'+f(esp);
+  if ($('d-esp-val')) $('d-esp-val').textContent = '$'+f(esp);
+}
+
+/* ═══ TERMS ═══ */
+function chkT() {
+  const all = [1,2,3,4,5].every(i => $('ck'+i).checked);
+  $('btn-sol').disabled = !all;
+  $('ck-dot').style.background = all ? 'var(--vd)' : 'var(--bd)';
+  $('ck-msg').textContent = all ? '✓ Todo listo — presiona solicitar' : 'Acepta todos los puntos para continuar';
+  $('ck-msg').style.color = all ? 'var(--vd)' : 'var(--gt)';
+}
+
+/* ═══ OTP ═══ */
+function oi(idx) {
+  const inp = $('o'+idx);
+  if (inp.value) { inp.classList.add('ok'); if (idx<5) $('o'+(idx+1)).focus(); }
+  const all = [0,1,2,3,4,5].every(i => $('o'+i).value !== '');
+  $('btn-otp').disabled = !all;
+  if (all) $('otp-hint').textContent = '✓ Listo — presiona confirmar';
+}
+function ok(e, idx) { if (e.key==='Backspace' && !$('o'+idx).value && idx>0) $('o'+(idx-1)).focus(); }
+function startTimer() {
+  let t=60; const btn=$('resend-btn'); btn.disabled=true;
+  const iv=setInterval(()=>{ t--; btn.textContent=`Reenviar (${t}s)`; if(t<=0){clearInterval(iv);btn.disabled=false;btn.textContent='Reenviar código';} }, 1000);
+}
+
+/* ═══ DASHBOARD DATA ═══ */
+const DASH = {
+  s:{
+    badge:['b-vd','● Al día'],
+    usado:'$38M', disp:'$2M', cupoW:95,
+    refillOn:true, refillNote:'$2.000.000 disponibles para refill',
+    banCls:'bn-vd', banIco:'✅', banT:'Tu crédito está al día', banS:'Tus ventas cubren el pago mínimo esperado.',
+    pct:'5% pagado', prog:5, saldo:'$38.000.000', pagado:'$2.000.000', meses:'17 meses',
+    c18:'$38.577.000', c18lbl:'Proyectado al mantener ritmo actual',
+    espVal:'$5.000.000', minVal:'$1.423.800', tpv:'vd'
+  },
+  a:{
+    badge:['b-am','⚠ Alerta'],
+    usado:'$40M', disp:'$0', cupoW:100,
+    refillOn:false, refillNote:'Refill pausado por caída en ventas',
+    banCls:'bn-am', banIco:'⚠️', banT:'Refill bloqueado', banS:'Tus ventas bajaron 2 meses consecutivos. El Refill se reactiva cuando las ventas se recuperen.',
+    pct:'2% pagado', prog:2, saldo:'$39.200.000', pagado:'$800.000', meses:'17 meses',
+    c18:'$40.041.000', c18lbl:'Capital acumulándose por bajas ventas',
+    espVal:'$2.500.000', minVal:'$1.423.800', tpv:'am'
+  },
+  m:{
+    badge:['b-co','↑ Aceleración'],
+    usado:'$40M', disp:'$0', cupoW:100,
+    refillOn:false, refillNote:'Bloqueado — cobro acelerado activo',
+    banCls:'bn-co', banIco:'🔴', banT:'Deuda acelerada', banS:'Tus ventas bajaron más de 4 meses seguidos. La deuda total es exigible de inmediato.',
+    pct:'1% pagado', prog:1, saldo:'$39.600.000', pagado:'$400.000', meses:'< 3 meses',
+    c18:'$40.413.000', c18lbl:'Deuda completa exigible',
+    espVal:'$500.000', minVal:'$1.423.800', tpv:'co'
+  }
+};
+
+function setDash(state) {
+  currentDashState = state;
+  document.querySelectorAll('.echip').forEach(c => c.classList.remove('sel'));
+  const cls = {s:'es-vd',a:'es-am',m:'es-co'}[state];
+  document.querySelector('.'+cls).classList.add('sel');
+  const c = DASH[state];
+
+  // Header + zone1 badge
+  ['d-badge','d-badge2'].forEach(id => {
+    $(id).className = 'bdg '+c.badge[0];
+    $(id).textContent = c.badge[1];
+  });
+
+  $('d-usado').textContent = c.usado;
+  $('d-disp').textContent  = c.disp;
+  $('d-cupobar').style.width = c.cupoW+'%';
+  $('d-refill').style.opacity       = c.refillOn?'1':'.45';
+  $('d-refill').style.pointerEvents = c.refillOn?'auto':'none';
+  $('d-refill-note').textContent = c.refillNote;
+
+  $('d-banner').className = 'banner '+c.banCls;
+  $('d-ban-ico').textContent = c.banIco;
+  $('d-ban-t').textContent   = c.banT;
+  $('d-ban-s').textContent   = c.banS;
+
+  $('d-pct').textContent    = c.pct;
+  $('d-prog').style.width   = c.prog+'%';
+  $('d-saldo').textContent  = c.saldo;
+  $('d-pagado').textContent = c.pagado;
+  $('d-meses').textContent  = c.meses;
+  $('d-c18').textContent    = c.c18;
+  $('d-c18-lbl').textContent = c.c18lbl;
+  $('d-esp-val').textContent = c.espVal;
+  $('d-min-val').textContent = c.minVal;
+}
+
+/* ═══ VENTAS CHART ENGINE ═══ */
+const S11_DATA = {
+  vd: {
+    pts: [5.5, 5.8, 5.5, 5.6, 5.8, 5.5, 5.7, 5.9],
+    months: ['M1','M2','M3','M4','M5','M6','M7','M8'],
+    breakAmber: -1, breakRed: -1,
+    ico:'✅', titulo:'Ventas saludables', banCls:'bn-vd',
+    desc:'Tus ventas cubren el pago esperado. Refill activo.',
+    rows:[
+      {m:'M1',v:'$55M',r:'$5,5M',s:'$36M',st:'vd'},{m:'M2',v:'$58M',r:'$5,8M',s:'$31M',st:'vd'},
+      {m:'M3',v:'$55M',r:'$5,5M',s:'$27M',st:'vd'},{m:'M4',v:'$56M',r:'$5,6M',s:'$22M',st:'vd'},
+      {m:'M5',v:'$55M',r:'$5,5M',s:'$18M',st:'vd'},{m:'M6',v:'$58M',r:'$5,8M',s:'$13M',st:'vd'},
+      {m:'M7',v:'$55M',r:'$5,5M',s:'$9M', st:'vd'},{m:'M8',v:'$57M',r:'$5,7M',s:'$4M', st:'vd'},
+    ]
+  },
+  am: {
+    pts: [5.5, 5.8, 5.5, 5.6, 3.8, 2.7],
+    months: ['M1','M2','M3','M4','M5','M6'],
+    breakAmber: 4, breakRed: -1,
+    ico:'🔒', titulo:'Refill bloqueado', banCls:'bn-am',
+    desc:'Tus ventas bajaron 2 meses consecutivos. El Refill se reactiva cuando se recuperen.',
+    rows:[
+      {m:'M1',v:'$55M',r:'$5,5M',s:'$36M',st:'vd'},{m:'M2',v:'$58M',r:'$5,8M',s:'$31M',st:'vd'},
+      {m:'M3',v:'$55M',r:'$5,5M',s:'$27M',st:'vd'},{m:'M4',v:'$56M',r:'$5,6M',s:'$22M',st:'vd'},
+      {m:'M5 ⚠️',v:'$38M',r:'$3,8M',s:'$19M',st:'am'},{m:'M6 🔒',v:'$27M',r:'$2,7M',s:'$17M',st:'am'},
+    ]
+  },
+  co: {
+    pts: [5.5, 5.8, 5.5, 5.6, 3.8, 2.7, 1.9, 1.3],
+    months: ['M1','M2','M3','M4','M5','M6','M7','M8'],
+    breakAmber: 4, breakRed: 6,
+    ico:'⚡', titulo:'Deuda acelerada', banCls:'bn-co',
+    desc:'Tus ventas bajaron más de 4 meses seguidos. La deuda es exigible de inmediato.',
+    rows:[
+      {m:'M1',v:'$55M',r:'$5,5M',s:'$36M',st:'vd'},{m:'M2',v:'$58M',r:'$5,8M',s:'$31M',st:'vd'},
+      {m:'M3',v:'$55M',r:'$5,5M',s:'$27M',st:'vd'},{m:'M4',v:'$56M',r:'$5,6M',s:'$22M',st:'vd'},
+      {m:'M5 ⚠️',v:'$38M',r:'$3,8M',s:'$19M',st:'am'},{m:'M6 🔒',v:'$27M',r:'$2,7M',s:'$17M',st:'am'},
+      {m:'M7',v:'$19M',r:'$1,9M',s:'$16M',st:'co'},{m:'M8 ⚡',v:'$13M',r:'$1,3M',s:'$15M',st:'co'},
+    ]
+  }
+};
+
+function buildChart(svgId, pts, months, breakAmber, breakRed) {
+  const svg = $(svgId);
+  if (!svg) return;
+  const NS = 'http://www.w3.org/2000/svg';
+  const mk = (tag, a) => { const e = document.createElementNS(NS,tag); Object.entries(a).forEach(([k,v])=>e.setAttribute(k,v)); return e; };
+  svg.innerHTML = '';
+
+  const W=322, H=160, pL=38, pR=14, pT=24, pB=26;
+  const cW=W-pL-pR, cH=H-pT-pB;
+  const yMin=0.6, yMax=6.8, yRng=yMax-yMin;
+  const n=pts.length;
+  const toX = i => pL+(i/Math.max(n-1,1))*cW;
+  const toY = v => pT+cH-((v-yMin)/yRng)*cH;
+  const refY = toY(5.0);
+
+  // Subtle danger zone below ref line
+  svg.appendChild(mk('rect',{x:pL,y:refY.toFixed(1),width:cW,height:(pT+cH-refY).toFixed(1),fill:'#fff3f4',opacity:'.45'}));
+
+  // Reference dashed line — pago esperado $5M
+  svg.appendChild(mk('line',{x1:pL,y1:refY.toFixed(1),x2:pL+cW,y2:refY.toFixed(1),stroke:'#5a7ff0','stroke-width':'1.5','stroke-dasharray':'5,3'}));
+  const refLbl = mk('text',{x:(pL+cW+2).toFixed(1),y:(refY+3.5).toFixed(1),'font-size':'8',fill:'#5a7ff0','font-family':'Montserrat,sans-serif','font-weight':'700'});
+  refLbl.textContent='$5M'; svg.appendChild(refLbl);
+
+  // Color helper
+  const segClr = i => breakRed>=0&&i>=breakRed ? '#cc2233' : breakAmber>=0&&i>=breakAmber ? '#d98b00' : '#0ea84a';
+
+  // Line segments
+  for (let i=0;i<n-1;i++) {
+    svg.appendChild(mk('line',{x1:toX(i).toFixed(1),y1:toY(pts[i]).toFixed(1),x2:toX(i+1).toFixed(1),y2:toY(pts[i+1]).toFixed(1),stroke:segClr(i),'stroke-width':'2.8','stroke-linecap':'round'}));
+  }
+
+  // Dots
+  pts.forEach((v,i) => {
+    svg.appendChild(mk('circle',{cx:toX(i).toFixed(1),cy:toY(v).toFixed(1),r:'3.5',fill:segClr(i),stroke:'#fff','stroke-width':'1.5'}));
+  });
+
+  // Diamond + label at refill block point (index breakAmber+1)
+  if (breakAmber>=0) {
+    const ai = breakAmber+1;
+    if (ai<n) {
+      const dx=toX(ai), dy=toY(pts[ai]);
+      svg.appendChild(mk('polygon',{points:`${dx},${dy-7} ${dx+6},${dy} ${dx},${dy+7} ${dx-6},${dy}`,fill:'#d98b00',stroke:'#fff','stroke-width':'1.5'}));
+      const lt=mk('text',{x:(dx).toFixed(1),y:(dy-11).toFixed(1),'text-anchor':'middle','font-size':'9',fill:'#d98b00','font-family':'Montserrat,sans-serif','font-weight':'800'}); lt.textContent='🔒'; svg.appendChild(lt);
+    }
+  }
+
+  // Diamond + label at acceleration point (last point when breakRed active)
+  if (breakRed>=0 && n>breakRed) {
+    const ri=n-1, dx=toX(ri), dy=toY(pts[ri]);
+    svg.appendChild(mk('polygon',{points:`${dx},${dy-7} ${dx+6},${dy} ${dx},${dy+7} ${dx-6},${dy}`,fill:'#cc2233',stroke:'#fff','stroke-width':'1.5'}));
+    const lt=mk('text',{x:(dx).toFixed(1),y:(dy-11).toFixed(1),'text-anchor':'middle','font-size':'9',fill:'#cc2233','font-family':'Montserrat,sans-serif','font-weight':'800'}); lt.textContent='⚡'; svg.appendChild(lt);
+  }
+
+  // X axis labels
+  months.forEach((m,i) => {
+    const t=mk('text',{x:toX(i).toFixed(1),y:(H-6).toFixed(1),'text-anchor':'middle','font-size':'8.5',fill:'#8f93ad','font-family':'Montserrat,sans-serif','font-weight':'600'});
+    t.textContent=m; svg.appendChild(t);
+  });
+
+  // Y axis labels
+  [{v:6,l:'$6M'},{v:5,l:'$5M'},{v:3,l:'$3M'},{v:1,l:'$1M'}].forEach(({v,l}) => {
+    const y=toY(v);
+    if (y<pT-4||y>pT+cH+4) return;
+    const t=mk('text',{x:(pL-3).toFixed(1),y:(y+3).toFixed(1),'text-anchor':'end','font-size':'8',fill:'#8f93ad','font-family':'Montserrat,sans-serif','font-weight':'500'});
+    t.textContent=l; svg.appendChild(t);
+  });
+}
+
+function drawVentasChart(tpv) {
+  const d = S11_DATA[tpv] || S11_DATA.vd;
+  buildChart('s11-chart', d.pts, d.months, d.breakAmber, d.breakRed);
+
+  // Update state card
+  if ($('s11-state-card')) {
+    $('s11-state-card').className = 'banner '+d.banCls;
+    $('s11-ico').textContent = d.ico;
+    $('s11-titulo').textContent = d.titulo;
+    $('s11-desc').textContent = d.desc;
+  }
+
+  // Build table
+  const tbody = $('s11-tbody');
+  if (tbody) {
+    const bg = {vd:'background:#eafaf2',am:'background:#fffaeb',co:'background:#fef0f2'};
+    const clr = {vd:'#0a7a38',am:'#9a6800',co:'#cc2233'};
+    tbody.innerHTML = d.rows.map(r =>
+      `<tr style="${bg[r.st]}"><td style="padding:7px 8px;color:${clr[r.st]};font-weight:700;">${r.m}</td><td style="padding:7px 6px;text-align:right;color:var(--dk);font-weight:600;">${r.v}</td><td style="padding:7px 6px;text-align:right;color:${clr[r.st]};font-weight:700;">${r.r}</td><td style="padding:7px 8px;text-align:right;color:var(--dk);font-weight:600;">${r.s}</td></tr>`
+    ).join('');
+  }
+}
+
+function drawS12Chart() {
+  buildChart('s12-chart',
+    [5.5,5.8,5.5,5.6,3.8,2.7,1.9,1.3],
+    ['M1','M2','M3','M4','M5','M6','M7','M8'],
+    4, 6
+  );
+}
+
+/* ═══ HISTORIAL ═══ */
+function buildHist() {
+  const tbody=$('hist-body'); tbody.innerHTML='';
+  let cap=AMT, rows='';
+  const mp=TPV_MO*DISC, isTc=EXP==='tc';
+  for (let m=1;m<=12;m++) {
+    const interest=cap*RATE, capMin=isTc?cap*CAP_TC:0;
+    const capPaid=Math.max(capMin,mp-interest-COMM);
+    cap=Math.max(0,cap-capPaid);
+    const bg=m%2===0?'background:#f5f7ff;':'background:#fff;';
+    rows+=`<tr style="${bg}"><td style="padding:9px 10px;color:var(--lbl);font-weight:600;">Mes ${m}</td><td style="padding:9px 7px;text-align:right;font-weight:700;color:var(--dk);">$${f(mp)}</td><td style="padding:9px 7px;text-align:right;color:var(--am);font-weight:600;">$${f(interest)}</td><td style="padding:9px 7px;text-align:right;color:var(--gt);font-weight:500;">$${f(COMM)}</td><td style="padding:9px 7px;text-align:right;color:var(--vd);font-weight:600;">$${f(capPaid)}</td><td style="padding:9px 10px;text-align:right;font-weight:800;color:var(--dk);">$${f(cap)}</td></tr>`;
+    if (cap<=0) break;
+  }
+  tbody.innerHTML=rows;
+  const m1i=AMT*RATE, m1c=Math.max(isTc?AMT*CAP_TC:0,mp-m1i-COMM);
+  if ($('hs-int')) $('hs-int').textContent=f(m1i);
+  if ($('hs-cap')) $('hs-cap').textContent=f(m1c);
+  let est=AMT;
+  for (let m=0;m<18;m++) {
+    const i=est*RATE, cp=isTc?est*CAP_TC:0;
+    est=Math.max(0,est-Math.max(cp,mp-i-COMM)); if(est<=0) break;
+  }
+  if ($('hs-c18')) $('hs-c18').textContent=est>0?'$'+f(est*(1+RATE)+COMM):'$0 (liquidado ✓)';
+}
+
+function dlExcel() {
+  const btn=event.target.closest('button'), orig=btn.innerHTML;
+  btn.innerHTML='<span>✅</span> Descargando...'; btn.disabled=true;
+  setTimeout(()=>{btn.innerHTML=orig;btn.disabled=false;},2000);
+}
+
+/* ═══ % DESCUENTO ═══ */
+function setPct(pct) {
+  [10,15,20].forEach(p=>$('p'+p).classList.toggle('on',p===pct));
+  $('pct-display').textContent=pct+'%';
+  let cap=AMT, months=0;
+  const pay=TPV_MO*(pct/100), isTc=EXP==='tc';
+  while (cap>0&&months<18) {
+    const i=cap*RATE, cp=isTc?cap*CAP_TC:0;
+    cap=Math.max(0,cap-Math.max(cp,pay-i-COMM)); months++; if(cap<=0) break;
+  }
+  $('pct-msg').textContent=cap<=0?`Con ${pct}% terminarías en ~${months} meses`:`Con ${pct}% el crédito llega al mes 18`;
+}
+function reqPct() {
+  const btn=$('s10').querySelector('.btn-p'), orig=btn.innerHTML;
+  btn.innerHTML='✅ Solicitud enviada'; btn.style.background='var(--vd)'; btn.disabled=true;
+  setTimeout(()=>{btn.innerHTML=orig;btn.style.background='';btn.disabled=false;},2500);
+}
+
+/* ═══ REFILL ═══ */
+function doRefill() {
+  const btn=$('d-refill'), orig=btn.innerHTML;
+  btn.innerHTML='✅ Refill solicitado'; btn.style.background='rgba(10,168,74,.9)'; btn.disabled=true;
+  setTimeout(()=>{btn.innerHTML=orig;btn.style.background='';btn.disabled=false;},2500);
+}
+
+/* ═══ INIT ═══ */
+function initDash() {
+  setDash('s');
+  drawVentasChart('vd');
+}
+
+/* Boot */
+updAmt(40000000);
+startTimer();
+setExp('bullet');
+drawS12Chart();
+</script>
+</body>
+</html>
